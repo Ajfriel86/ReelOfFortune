@@ -53,4 +53,11 @@ class SlotMachine {
         this.updatePointsDisplay();
     }
 
+    // Method to set up the reels
+    setupReels() {
+        for (let i = 1; i <= 3; i++) {
+            const reel = new Reel(i, this.spinCompleteCallback.bind(this)); // Create a new Reel instance
+            this.reels.push(reel); // Add the reel to the reels array
+        }
+    }
 }
