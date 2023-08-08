@@ -135,4 +135,43 @@ class SlotMachine {
         this.updatePointsDisplay();
     }
 
+    // Callback function to execute after spinning completes
+    spinCompleteCallback() {
+        // if statement to check for a win condition after every move
+        if (this.moves > 0) {
+            // Check for a win condition after all reels have stopped spinning
+            this.checkWinCondition();
+        }
+    }
+
+    // Method to check for a win condition
+    checkWinCondition() {
+
+        // Get image paths from the reels
+        const imagePaths = this.reels.map(reel => reel.imageElement.src);
+
+        // If statement to check if all thee images match and if they do, the user gets 100 points, the points displayed is updated, a pop tells the user they matched the images 
+        if (imagePaths[0] === imagePaths[1] && imagePaths[1] === imagePaths[2]) {
+            // Award 100 points for a three-of-a-kind win
+            this.points += 100;
+            // This updates the points displayed on the screem
+            this.updatePointsDisplay();
+            //  a pop tells the user they matched the images 
+            alert('Congratulations! You have a three-of-a-kind win! Points: ' + this.points);
+
+            // If statement to see if the points gained are greater than or equalt to the points to win AND if the moves made are less than or equal to the max moves to win
+            if (this.points >= this.pointsToWin && this.moves <= this.maxMoves) {
+                // if points and moves are met a popup tells the user they won
+                alert(`You win! You reached ${this.pointsToWin} points within ${this.maxMoves} moves.`);
+            }
+
+            // else/if the moves taken are equal to the max moves then the user looses
+            else if (this.moves === this.maxMoves) {
+                alert(`You lose! You did not reach ${this.pointsToWin} points within ${this.maxMoves} moves.`);
+                // Reset the game
+                this.resetGame();
+            }
+        }
+    }
+
 }
