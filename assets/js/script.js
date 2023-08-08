@@ -4,13 +4,13 @@ class Reel {
     constructor(id, callback) {
         // Identifier for the reel
         this.id = id;
-        // array of images
+        // Array of images
         this.images = ['orange.png', 'lemon.png', 'grape.png', 'diamond.png', 'cherry.png', 'bell.png', '7.jpg', ];
         // Getting the 'reel*' id from the html doc
         this.element = document.getElementById(`reel${id}`);
         // Getting the 'img*' id from the html doc
         this.imageElement = document.getElementById(`img${id}`);
-        // Callback function to execute when spinning has completed
+        // Callback function to execute after spinning completes
         this.callback = callback;
     }
 
@@ -20,7 +20,7 @@ class Reel {
         const randomIndex = Math.floor(Math.random() * this.images.length);
         // Creates a variable to locate the images in their folder and assigns the images to the randomIndex above
         const imagePath = './assets/images/' + this.images[randomIndex];
-        // This sets the image source
+        // Set the image source
         this.imageElement.src = imagePath;
         // Add a 'load' event listener to the image element to track when the image is loaded
         this.imageElement.addEventListener('load', this.callback);
@@ -29,6 +29,7 @@ class Reel {
 
 // Define the SlotMachine class for managing the game
 class SlotMachine {
+    // constructor for the level setting of the game, easy/med/hard
     constructor(level) {
         // Initializes properties such as arrays, the level of the game, moves, maxMoves, points to win, then connects JS elements to their HTML counter-parts
         this.reels = [];
@@ -55,9 +56,12 @@ class SlotMachine {
 
     // Method to set up the reels
     setupReels() {
+        // for loop for setting up 3 instances for the 3 reels
         for (let i = 1; i <= 3; i++) {
-            const reel = new Reel(i, this.spinCompleteCallback.bind(this)); // Create a new Reel instance
-            this.reels.push(reel); // Add the reel to the reels array
+            // Creates a reel instance
+            const reel = new Reel(i, this.spinCompleteCallback.bind(this));
+            // Adds the reel to the reels array
+            this.reels.push(reel);
         }
     }
 
@@ -102,20 +106,18 @@ class SlotMachine {
         this.reels.forEach(reel => reel.spin());
         // Increment moves counter
         this.moves++;
-
         // Check if the game is still active
         if (this.moves <= this.maxMoves) {
             // Check for win or lose condition
             this.checkWinCondition();
-        }
-        // otherwise it ends the game
-        else {
+        } else {
+            // ends the game
             this.endGame();
         }
     }
     // Method to end the game
     endGame() {
-        // if statement: if the points a uswer has is less than or equal to the points needed to win an alert is displayed
+        // if statement: if the points a user has is less than or equal to the points needed to win an alert is displayed
         if (this.points >= this.pointsToWin) {
             // alert for winning the game and then displaying the users points and moves
             alert(`You win! You reached ${this.pointsToWin} points within ${this.maxMoves} moves.`);
@@ -125,14 +127,8 @@ class SlotMachine {
             // an alreat is displayed telling the user they lost and their points/moves is also displayed 
             alert(`You lose! You did not reach ${this.pointsToWin} points within ${this.maxMoves} moves.`);
         }
-        // this resets the game
+        // resets the game
         this.resetGame();
-    }
-    // Method to reset the game
-    resetGame() {
-        this.points = 0;
-        this.moves = 0;
-        this.updatePointsDisplay();
     }
 
     // Callback function to execute after spinning completes
@@ -146,25 +142,21 @@ class SlotMachine {
 
     // Method to check for a win condition
     checkWinCondition() {
-
         // Get image paths from the reels
         const imagePaths = this.reels.map(reel => reel.imageElement.src);
-
         // If statement to check if all thee images match and if they do, the user gets 100 points, the points displayed is updated, a pop tells the user they matched the images 
         if (imagePaths[0] === imagePaths[1] && imagePaths[1] === imagePaths[2]) {
-            // Award 100 points for a three-of-a-kind win
+            // Award points for a three-of-a-kind win
             this.points += 100;
             // This updates the points displayed on the screem
             this.updatePointsDisplay();
             //  a pop tells the user they matched the images 
             alert('Congratulations! You have a three-of-a-kind win! Points: ' + this.points);
-
             // If statement to see if the points gained are greater than or equalt to the points to win AND if the moves made are less than or equal to the max moves to win
             if (this.points >= this.pointsToWin && this.moves <= this.maxMoves) {
                 // if points and moves are met a popup tells the user they won
                 alert(`You win! You reached ${this.pointsToWin} points within ${this.maxMoves} moves.`);
             }
-
             // else/if the moves taken are equal to the max moves then the user looses
             else if (this.moves === this.maxMoves) {
                 alert(`You lose! You did not reach ${this.pointsToWin} points within ${this.maxMoves} moves.`);
@@ -173,16 +165,20 @@ class SlotMachine {
             }
         }
     }
+
+    // Method to reset the game
+    resetGame() {
+        this.points = 0;
+        this.moves = 0;
+        this.updatePointsDisplay();
+    }
+
     // Method to update the selected game level
     updateLevel() {
-        // Get the selected level from the dropdown menu
-        const newLevel = this.levelSelect.value;
-        // Update the current level
-        this.level = newLevel;
-        // Update maximum allowed moves
-        this.maxMoves = this.getMaxMoves();
-        // Update points required to win
-        this.pointsToWin = this.getPointsToWin();
+        const newLevel = this.levelSelect.value; // Get the selected level from the dropdown
+        this.level = newLevel; // Update the current level
+        this.maxMoves = this.getMaxMoves(); // Update maximum allowed moves
+        this.pointsToWin = this.getPointsToWin(); // Update points required to win
     }
 }
 
