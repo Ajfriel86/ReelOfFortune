@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title></title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <main class="container">
+        <div class="points" id="points-display">
+            <h1>Points: 0</h1>
+        </div>
+
+        <div class="level">
+            <select id="level-select">
+                <option value="easy">Easy</option>
+                <option value="medium" selected>Medium</option>
+                <option value="hard">Hard</option>
+            </select>
+        </div>
+        <div class="slot-machine">
+            <div class="reel" id="reel1"><img id="img1"></div>
+            <div class="reel" id="reel2"><img id="img2"></div>
+            <div class="reel" id="reel3"><img id="img3"></div>
+        </div>
+        <div class="slot-display">
+            <button class="btn" id="spin-button">Spin</button>
+            <button class="btn" id="reset-button">Reset</button>
+        </div>
+    </main>
+
+
+    <script src="script.js" async defer></script>
+</body>
+
+</html>
