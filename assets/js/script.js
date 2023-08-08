@@ -61,9 +61,9 @@ class SlotMachine {
         }
     }
 
-
     // Method to calculate the maximum allowed moves based on the level
     getMaxMoves() {
+        // using a switch statement to determine the amount of moves a user gets depending on the level they selected
         switch (this.level) {
             case 'easy':
                 return 20;
@@ -78,6 +78,7 @@ class SlotMachine {
 
     // Method to calculate points required to win based on the level
     getPointsToWin() {
+        // using a switch statement for the different levels available to play the game
         switch (this.level) {
             case 'easy':
                 return 100;
@@ -88,6 +89,50 @@ class SlotMachine {
             default:
                 return 200;
         }
+    }
+
+    // Method to update the points display on the screen
+    updatePointsDisplay() {
+        this.pointsDisplay.innerText = 'Points: ' + this.points;
+    }
+
+    // Method to handle the spin button click
+    spin() {
+        // Spin each reel
+        this.reels.forEach(reel => reel.spin());
+        // Increment moves counter
+        this.moves++;
+
+        // Check if the game is still active
+        if (this.moves <= this.maxMoves) {
+            // Check for win or lose condition
+            this.checkWinCondition();
+        }
+        // otherwise it ends the game
+        else {
+            this.endGame();
+        }
+    }
+    // Method to end the game
+    endGame() {
+        // if statement: if the points a uswer has is less than or equal to the points needed to win an alert is displayed
+        if (this.points >= this.pointsToWin) {
+            // alert for winning the game and then displaying the users points and moves
+            alert(`You win! You reached ${this.pointsToWin} points within ${this.maxMoves} moves.`);
+        }
+        // else statement to handle the user loosinig the game
+        else {
+            // an alreat is displayed telling the user they lost and their points/moves is also displayed 
+            alert(`You lose! You did not reach ${this.pointsToWin} points within ${this.maxMoves} moves.`);
+        }
+        // this resets the game
+        this.resetGame();
+    }
+    // Method to reset the game
+    resetGame() {
+        this.points = 0;
+        this.moves = 0;
+        this.updatePointsDisplay();
     }
 
 }
