@@ -1,0 +1,133 @@
+body {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    min-height: 100vh;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    background-image: url('./assets/images/casino.jpg');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-color: rgba(236, 10, 17, 1);
+
+}
+
+.container {
+    background-color: rgba(228, 18, 25, 0.7);
+    border-radius: 15px;
+    border: solid 5px #ffffff;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    flex-wrap: wrap;
+    --box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
+}
+
+.points {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    background-color: rgb(235, 12, 19);
+    border: solid 3px #ffffff;
+    border-radius: 15px;
+    width: 10em;
+    height: 3em;
+    text-align: center;
+    box-shadow: var(--box-shadow);
+    margin-bottom: 1rem;
+    margin-top: 1rem;
+}
+
+/* Styling for the slot machine container */
+.slot-machine {
+    background-color: rgba(236, 10, 17, 0.7);
+    box-shadow: var(--box-shadow);
+    border: solid 3px #ffffff;
+    border-radius: 15px;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-bottom: 1rem;
+    margin-left: 1rem;
+    margin-right: 1rem;
+    margin-top: 1rem;
+}
+
+.slot-display {
+    display: flex;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+    width: 100%;
+    margin-bottom: 1rem;
+
+}
+
+img {
+    width: 50%;
+    height: 40%;
+}
+
+/* Styling for the reels */
+.reel {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 200px;
+    height: 200px;
+    border: 2px solid #333;
+    border-radius: 15px;
+    margin: 10px;
+    object-fit: contain;
+    box-shadow: var(--box-shadow);
+    background-color: rgba(10, 247, 73, 0.7);
+    border: solid 3px #ffffff;
+}
+
+/* Styling for the spin button */
+.btn {
+    padding: 10px 20px;
+    font-size: 1.2rem;
+    border-radius: 15px;
+    background-color: #3498db;
+    color: #000000;
+    border: none;
+    cursor: pointer;
+    box-shadow: var(--box-shadow);
+}
+
+@media only screen and (max-width: 800px) {
+
+    .points {
+        width: 5em;
+        height: 2em;
+        font-size: 15px;
+        margin-bottom: .2rem;
+        margin-top: .2rem;
+        border: solid 1px #ffffff;
+    }
+
+    .reel {
+        width: 120px;
+        height: 120px;
+        margin: 7px;
+
+    }
+
+    .slot-machine {
+        margin-bottom: .2rem;
+        margin-left: .2rem;
+        margin-right: .2rem;
+        margin-top: .2rem;
+    }
+
+    .btn {
+        padding: 5px 10px;
+        font-size: .8rem;
+    }
+}
