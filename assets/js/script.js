@@ -26,3 +26,31 @@ class Reel {
         this.imageElement.addEventListener('load', this.callback);
     }
 }
+
+// Define the SlotMachine class for managing the game
+class SlotMachine {
+    constructor(level) {
+        // Initializes properties such as arrays, the level of the game, moves, maxMoves, points to win, then connects JS elements to their HTML counter-parts
+        this.reels = [];
+        this.level = level;
+        this.moves = 0;
+        this.maxMoves = this.getMaxMoves();
+        this.pointsToWin = this.getPointsToWin();
+        this.points = 0;
+        this.pointsDisplay = document.getElementById('points-display');
+        this.spinButton = document.getElementById('spin-button');
+        this.resetButton = document.getElementById('reset-button');
+        this.levelSelect = document.getElementById('level-select');
+
+        // Set up event listeners for the spin button, reset button, and the level select
+        this.spinButton.addEventListener('click', this.spin.bind(this));
+        this.resetButton.addEventListener('click', this.resetGame.bind(this));
+        this.levelSelect.addEventListener('change', this.updateLevel.bind(this));
+
+        // Set default level and initialize reels
+        this.levelSelect.value = this.level;
+        this.setupReels();
+        this.updatePointsDisplay();
+    }
+
+}
