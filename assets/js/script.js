@@ -60,4 +60,34 @@ class SlotMachine {
             this.reels.push(reel); // Add the reel to the reels array
         }
     }
+
+
+    // Method to calculate the maximum allowed moves based on the level
+    getMaxMoves() {
+        switch (this.level) {
+            case 'easy':
+                return 20;
+            case 'medium':
+                return 15;
+            case 'hard':
+                return 10;
+            default:
+                return 15;
+        }
+    }
+
+    // Method to calculate points required to win based on the level
+    getPointsToWin() {
+        switch (this.level) {
+            case 'easy':
+                return 100;
+            case 'medium':
+                return 200;
+            case 'hard':
+                return 400;
+            default:
+                return 200;
+        }
+    }
+
 }
