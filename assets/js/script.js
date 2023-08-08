@@ -173,5 +173,18 @@ class SlotMachine {
             }
         }
     }
-
+    // Method to update the selected game level
+    updateLevel() {
+        // Get the selected level from the dropdown menu
+        const newLevel = this.levelSelect.value;
+        // Update the current level
+        this.level = newLevel;
+        // Update maximum allowed moves
+        this.maxMoves = this.getMaxMoves();
+        // Update points required to win
+        this.pointsToWin = this.getPointsToWin();
+    }
 }
+
+// Create a new instance of the SlotMachine class with the default level 'medium'
+const slotMachine = new SlotMachine('medium');
