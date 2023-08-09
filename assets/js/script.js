@@ -20,10 +20,17 @@ class Reel {
         const randomIndex = Math.floor(Math.random() * this.images.length);
         // Creates a variable to locate the images in their folder and assigns the images to the randomIndex above
         const imagePath = './assets/images/' + this.images[randomIndex];
-        // Set the image source
-        this.imageElement.src = imagePath;
+        // Create a new load event listener and store it in a variable
+        const loadListener = () => {
+            // Removing the listener after it has been triggered ensures the callback is only called once per spin (as I was having errors with repeated call backs)
+            this.imageElement.removeEventListener('load', loadListener);
+            // Call the callback once
+            this.callback();
+        };
         // Add a 'load' event listener to the image element to track when the image is loaded
         this.imageElement.addEventListener('load', this.callback);
+        // Set the image source
+        this.imageElement.src = imagePath;
     }
 }
 
