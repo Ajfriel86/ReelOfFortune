@@ -16,19 +16,34 @@ class Reel {
 
     // Method to spin the reel
     spin() {
+        console.log('Reel ' + this.id)
+        // if statement to return nothing if the reel is already spinning
+        if (this.isSpinning) {
+            console.log('Reel ' + this.id + ' is already spinning')
+            return;
+        }
+        // initilizes the spinning if the reel is not currently spinning 
+        this.isSpinning = true;
         // creating a variable for a random index, Math.floor rounds fdown to the nearest integer, and Math.random generates a random number and chooses this from the selection (or lenght/amount) of images
         const randomIndex = Math.floor(Math.random() * this.images.length);
         // Creates a variable to locate the images in their folder and assigns the images to the randomIndex above
-        const imagePath = './assets/images/' + this.images[randomIndex];
-        // Create a new load event listener and store it in a variable
+        const imagePath = '/assets/images/' + this.images[randomIndex];
+        // Create a new load event listener and store it in a variable using an arrow function, the = is used to assign a value to the varibale 'loadListener,' the value is inside the {}
         const loadListener = () => {
+            console.log('Image loaded in reel ' + this.id);
             // Removing the listener after it has been triggered ensures the callback is only called once per spin (as I was having errors with repeated call backs)
             this.imageElement.removeEventListener('load', loadListener);
-            // Call the callback once
-            this.callback();
+            if (this.isSpinning) {
+                // Reset the spinning flag
+                this.isSpinning = false;
+                // Call the callback once
+                this.callback();
+            }
+            // Add the load listener back after the event has been handled
+            this.imageElement.addEventListener('load', loadListener);
         };
         // Add a 'load' event listener to the image element to track when the image is loaded
-        this.imageElement.addEventListener('load', this.callback);
+        this.imageElement.addEventListener('load', loadListener);
         // Set the image source
         this.imageElement.src = imagePath;
     }
