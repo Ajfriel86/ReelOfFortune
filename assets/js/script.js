@@ -27,14 +27,15 @@ class Reel {
         // creating a variable for a random index, Math.floor rounds fdown to the nearest integer, and Math.random generates a random number and chooses this from the selection (or lenght/amount) of images
         const randomIndex = Math.floor(Math.random() * this.images.length);
         // Creates a variable to locate the images in their folder and assigns the images to the randomIndex above
-        const imagePath = '/assets/images/' + this.images[randomIndex];
+        const imagePath = 'assets/images/' + this.images[randomIndex];
         // Create a new load event listener and store it in a variable using an arrow function, the = is used to assign a value to the varibale 'loadListener,' the value is inside the {}
         const loadListener = () => {
             console.log('Image loaded in reel ' + this.id);
             // Removing the listener after it has been triggered ensures the callback is only called once per spin (as I was having errors with repeated call backs)
             this.imageElement.removeEventListener('load', loadListener);
+            // if statement to check if the reel is still spinning
             if (this.isSpinning) {
-                // Reset the spinning flag
+                // Reset the spinning reel to false to make sure it is not spionning anymore
                 this.isSpinning = false;
                 // Call the callback once
                 this.callback();
