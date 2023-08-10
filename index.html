@@ -13,9 +13,21 @@
 
 <body>
     <main class="container">
-        <div class="points" id="points-display">
-            <h1>Points: 0</h1>
+        <!-- Add these elements within your HTML file, preferably inside the <body> element -->
+        <div id="custom-popup" class="popup">
+            <div class="popup-content">
+                <p id="popup-message"></p>
+                <button id="popup-okay">OK</button>
+            </div>
         </div>
+        <h1>Reel of Fortune</h1>
+        <div class="counter" id="points-display">
+            <h2>Points: 0</h2>
+        </div>
+        <div class="counter" id="moves-display">
+            <h2>Moves: <span id="moves-count">0</span></h2>
+        </div>
+
 
         <div class="level">
             <select id="level-select">
