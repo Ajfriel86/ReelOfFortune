@@ -16,35 +16,19 @@ class Reel {
 
     // Method to spin the reel
     spin() {
-        console.log('Reel ' + this.id)
-        // if statement to return nothing if the reel is already spinning
-        if (this.isSpinning) {
-            console.log('Reel ' + this.id + ' is already spinning')
-            return;
-        }
-        // initilizes the spinning if the reel is not currently spinning 
-        this.isSpinning = true;
         // creating a variable for a random index, Math.floor rounds fdown to the nearest integer, and Math.random generates a random number and chooses this from the selection (or lenght/amount) of images
         const randomIndex = Math.floor(Math.random() * this.images.length);
         // Creates a variable to locate the images in their folder and assigns the images to the randomIndex above
-        const imagePath = 'assets/images/' + this.images[randomIndex];
-        // Create a new load event listener and store it in a variable using an arrow function, the = is used to assign a value to the varibale 'loadListener,' the value is inside the {}
+        const imagePath = './assets/images/' + this.images[randomIndex];
+        // Create a new load event listener and store it in a variable
         const loadListener = () => {
-            console.log('Image loaded in reel ' + this.id);
             // Removing the listener after it has been triggered ensures the callback is only called once per spin (as I was having errors with repeated call backs)
             this.imageElement.removeEventListener('load', loadListener);
-            // if statement to check if the reel is still spinning
-            if (this.isSpinning) {
-                // Reset the spinning reel to false to make sure it is not spionning anymore
-                this.isSpinning = false;
-                // Call the callback once
-                this.callback();
-            }
-            // Add the load listener back after the event has been handled
-            this.imageElement.addEventListener('load', loadListener);
+            // Call the callback once
+            this.callback();
         };
         // Add a 'load' event listener to the image element to track when the image is loaded
-        this.imageElement.addEventListener('load', loadListener);
+        this.imageElement.addEventListener('load', this.callback);
         // Set the image source
         this.imageElement.src = imagePath;
     }
@@ -61,6 +45,7 @@ class SlotMachine {
         this.maxMoves = this.getMaxMoves();
         this.pointsToWin = this.getPointsToWin();
         this.points = 0;
+        this.movesDisplay = document.getElementById('moves-display')
         this.pointsDisplay = document.getElementById('points-display');
         this.spinButton = document.getElementById('spin-button');
         this.resetButton = document.getElementById('reset-button');
@@ -75,8 +60,23 @@ class SlotMachine {
         this.levelSelect.value = this.level;
         this.setupReels();
         this.updatePointsDisplay();
+        this.updateMovesDisplay();
+
+    }
+    showPopup(message) {
+        const popup = document.getElementById('custom-popup');
+        const popupMessage = document.getElementById('popup-message');
+        popupMessage.innerText = message;
+        popup.style.display = 'flex';
+
+        const popupOkayButton = document.getElementById('popup-okay');
+        popupOkayButton.addEventListener('click', this.hidePopup.bind(this));
     }
 
+    hidePopup() {
+        const popup = document.getElementById('custom-popup');
+        popup.style.display = 'none';
+    }
     // Method to set up the reels
     setupReels() {
         // for loop for setting up 3 instances for the 3 reels
@@ -122,13 +122,17 @@ class SlotMachine {
     updatePointsDisplay() {
         this.pointsDisplay.innerText = 'Points: ' + this.points;
     }
-
+    updateMovesDisplay() {
+        const movesDisplay = document.getElementById('moves-display');
+        movesDisplay.innerText = 'Moves: ' + this.moves;
+    }
     // Method to handle the spin button click
     spin() {
         // Spin each reel
         this.reels.forEach(reel => reel.spin());
         // Increment moves counter
         this.moves++;
+        this.updateMovesDisplay()
         // Check if the game is still active
         if (this.moves <= this.maxMoves) {
             // Check for win or lose condition
@@ -143,12 +147,12 @@ class SlotMachine {
         // if statement: if the points a user has is less than or equal to the points needed to win an alert is displayed
         if (this.points >= this.pointsToWin) {
             // alert for winning the game and then displaying the users points and moves
-            alert(`You win! You reached ${this.pointsToWin} points within ${this.maxMoves} moves.`);
+            this.showPopup(`You win! You reached ${this.pointsToWin} points within ${this.maxMoves} moves.`);
         }
         // else statement to handle the user loosinig the game
         else {
             // an alreat is displayed telling the user they lost and their points/moves is also displayed 
-            alert(`You lose! You did not reach ${this.pointsToWin} points within ${this.maxMoves} moves.`);
+            this.showPopup(`You lose! You did not reach ${this.pointsToWin} points within ${this.maxMoves} moves.`);
         }
         // resets the game
         this.resetGame();
@@ -174,15 +178,15 @@ class SlotMachine {
             // This updates the points displayed on the screem
             this.updatePointsDisplay();
             //  a pop tells the user they matched the images 
-            alert('Congratulations! You have a three-of-a-kind win! Points: ' + this.points);
+            this.showPopup('Congratulations! You have a three-of-a-kind win! Points: ' + this.points);
             // If statement to see if the points gained are greater than or equalt to the points to win AND if the moves made are less than or equal to the max moves to win
             if (this.points >= this.pointsToWin && this.moves <= this.maxMoves) {
                 // if points and moves are met a popup tells the user they won
-                alert(`You win! You reached ${this.pointsToWin} points within ${this.maxMoves} moves.`);
+                this.showPopup(`You win! You reached ${this.pointsToWin} points within ${this.maxMoves} moves.`);
             }
             // else/if the moves taken are equal to the max moves then the user looses
             else if (this.moves === this.maxMoves) {
-                alert(`You lose! You did not reach ${this.pointsToWin} points within ${this.maxMoves} moves.`);
+                this.showPopup(`You lose! You did not reach ${this.pointsToWin} points within ${this.maxMoves} moves.`);
                 // Reset the game
                 this.resetGame();
             }
@@ -193,6 +197,7 @@ class SlotMachine {
     resetGame() {
         this.points = 0;
         this.moves = 0;
+        this.updateMovesDisplay();
         this.updatePointsDisplay();
     }
 
