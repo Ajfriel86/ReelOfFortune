@@ -39,43 +39,68 @@ class SlotMachine {
     // constructor for the level setting of the game, easy/med/hard
     constructor(level) {
         // Initializes properties such as arrays, the level of the game, moves, maxMoves, points to win, then connects JS elements to their HTML counter-parts
-        this.reels = [];
+        // Initializes an empty array. This array is intended to store instances of the Reel class.
         this.level = level;
+        // This is used to track the number of moves a user had made, starting at 0
         this.moves = 0;
+        // This represents the max number of moves a player can take depending on the level of the game selected
         this.maxMoves = this.getMaxMoves();
-        this.pointsToWin = this.getPointsToWin();
+        // This is used to track the number of points a user needs in order to win the game, starting at 0
         this.points = 0;
+        // This represents the max number of points needed for a user to win depending on the level of the game selcted
+        this.pointsToWin = this.getPointsToWin();
+        // This retrieves the HTML element moves-display and assigns it to the property movesDispaly 
         this.movesDisplay = document.getElementById('moves-display')
+        // // This retrieves the HTML element points-display and assigns it to the porperty pointsDisplay
         this.pointsDisplay = document.getElementById('points-display');
+        // // This retrieves the HTML element spin-button and assigns it to the property spinButton
         this.spinButton = document.getElementById('spin-button');
+        // This retrieves the HTML element rest-button and assigns it to the property restButton
         this.resetButton = document.getElementById('reset-button');
+        // This retrieves the HTML element level-select and assigns it the proerpty levelSelect
         this.levelSelect = document.getElementById('level-select');
 
-        // Set up event listeners for the spin button, reset button, and the level select
+        // Set up event listeners for the UI elements
+        // This refers to the HTML element spin-button, the event is listening for the click on this button and will bind that click to the JS proerpty spinButton
         this.spinButton.addEventListener('click', this.spin.bind(this));
+        // This refers to the HTML element reset-button, the event is listening for the click on this button and will bind that click to the JS proerpty resetButton
         this.resetButton.addEventListener('click', this.resetGameNoMsg.bind(this));
+        // This refers to the HTML element reset-button, the event is listening for the click on this button and will bind that click to the JS proerpty resetButton
         this.resetButton.addEventListener('click', this.resetGame.bind(this));
+        // This refers to the HTML element level-select, the event is listening for the click on this button and will bind that click to the JS proerpty levelSelect
         this.levelSelect.addEventListener('change', this.updateLevel.bind(this));
 
         // Set default level and initialize reels
+        // This is in reference to the selected level by the user, this will set the value picked by the user and then apply that to the game
         this.levelSelect.value = this.level;
+        // This calls the method setUpReels() that spins the all three reels using a for loop and adds them to the array 'reels[]'
         this.setupReels();
+        // This calls the method updatePointsDisplay, which will update the on screen value of the points earned by the user
         this.updatePointsDisplay();
+        // This calls the method updateMovesDispaly, which will update the on screen display of moves taken by a user
         this.updateMovesDisplay();
 
     }
+    // Method for Custom popup messages instead of alrets
     showPopup(message) {
+        // This retrieves the HTML element custom-popup and assigns it to the local variable popup 
         const popup = document.getElementById('custom-popup');
+        // This retrieves the HTML element popup-message and assigns it to the local variable popupMessage
         const popupMessage = document.getElementById('popup-message');
+        // This thats the popupMessage varible, and updates the text within it, the 'messgae' is used as a variable to store the current message being dispalyed
         popupMessage.innerText = message;
+        // This assigns the CSS property of 'flex' to the popup window
         popup.style.display = 'flex';
-
+        // This refers to the HTML element popup-okay, which is the button on the popup, and assigns it to the local variable popupOkayButton
         const popupOkayButton = document.getElementById('popup-okay');
+        // This then takes the popupOkayButton and the event listens for the click that will then bind this JS proeproty to the HTML elemet counterpart  
         popupOkayButton.addEventListener('click', this.hidePopup.bind(this));
     }
-
+    // Method to hide the pop up
     hidePopup() {
+        // This refers to the HTML element custom-popup, which is the button on the popup, and assigns it to the local variable popup
         const popup = document.getElementById('custom-popup');
+        // This assigns the CSS property of 'none' to the popup window, in order to hide it
         popup.style.display = 'none';
     }
     // Method to set up the reels
@@ -121,10 +146,15 @@ class SlotMachine {
 
     // Method to update the points display on the screen
     updatePointsDisplay() {
+        // this takes the points the user has earned and the displays them
         this.pointsDisplay.innerText = 'Points: ' + this.points;
     }
+
+    // Method to update the moves displayed on screen
     updateMovesDisplay() {
+        // This refers to the HTML element moves-display and assigns it ot the local variable movesDisaply
         const movesDisplay = document.getElementById('moves-display');
+        // This then takes the JS property movesDisplay and displays the amount of moves taken by the user on screen 
         movesDisplay.innerText = 'Moves: ' + this.moves;
     }
     // Method to handle the spin button click
@@ -133,35 +163,36 @@ class SlotMachine {
         this.reels.forEach(reel => reel.spin());
         // Increment moves counter
         this.moves++;
+        // Update the moves
         this.updateMovesDisplay()
         // Check if the game is still active
         if (this.moves <= this.maxMoves) {
             // Check for win or lose condition
             this.checkWinCondition();
         } else {
-            // ends the game
+            // Ends the game
             this.endGame();
         }
     }
     // Method to end the game
     endGame() {
-        // if statement: if the points a user has is less than or equal to the points needed to win an alert is displayed
+        // If statement: if the points a user has is less than or equal to the points needed to win an alert is displayed
         if (this.points >= this.pointsToWin) {
             // alert for winning the game and then displaying the users points and moves
             this.showPopup(`You win! You reached ${this.pointsToWin} points within ${this.maxMoves} moves.`);
         }
-        // else statement to handle the user loosinig the game
+        // Else statement to handle the user loosinig the game
         else {
-            // an alreat is displayed telling the user they lost and their points/moves is also displayed 
+            // An alreat is displayed telling the user they lost and their points/moves is also displayed 
             this.showPopup(`You lose! You did not reach ${this.pointsToWin} points within ${this.maxMoves} moves.`);
         }
-        // resets the game
+        // Resets the game without asking the user if they want to rest the game
         this.resetGameNoMsg();
     }
 
     // Callback function to execute after spinning completes
     spinCompleteCallback() {
-        // if statement to check for a win condition after every move
+        // If statement to check for a win condition after every move
         if (this.moves > 0) {
             // Check for a win condition after all reels have stopped spinning
             this.checkWinCondition();
@@ -193,35 +224,50 @@ class SlotMachine {
             }
         }
     }
-    // Method to handle the reset button click
+    // Method to handle a reset with no confirmation
     resetGameNoMsg() {
-        // Reset the game if the user confirms
+        // Reset the games points & moves if the user confirms
+        // This sets the points back to zero
         this.points = 0;
+        // This sets the moves back to zero
         this.moves = 0;
+        // This updates the moves on screen to reflect them being reset to zero
         this.updateMovesDisplay();
+        // This updates the points on screen to reflect them being reset to zero
         this.updatePointsDisplay();
     }
 
-    // Method to handle the reset button click
+    // Method to handle the reset button click with confirmation
     resetGame() {
         // Show a confirmation popup before resetting the game
         this.showPopup("Are you sure you want to reset the game?");
+        // This refers to the HTML elemenet popup-okay, which assigns it othe JS property popupOkayButton
         const popupOkayButton = document.getElementById("popup-okay");
+        // The event listener then listens for the button click
         popupOkayButton.addEventListener("click", () => {
+            // The popup is then hidden and the game resets
             this.hidePopup();
-            // Reset the game if the user confirms
+            // Reset the games points & moves if the user confirms
+            // This sets the points back to zero
             this.points = 0;
+            // This sets the moves back to zero
             this.moves = 0;
+            // This updates the moves on screen to reflect them being reset to zero
             this.updateMovesDisplay();
+            // This updates the points on screen to reflect them being reset to zero
             this.updatePointsDisplay();
         });
     }
     // Method to update the selected game level
     updateLevel() {
-        const newLevel = this.levelSelect.value; // Get the selected level from the dropdown
-        this.level = newLevel; // Update the current level
-        this.maxMoves = this.getMaxMoves(); // Update maximum allowed moves
-        this.pointsToWin = this.getPointsToWin(); // Update points required to win
+        // Get the selected level from the dropdown
+        const newLevel = this.levelSelect.value;
+        // Update the current level
+        this.level = newLevel;
+        // Update maximum allowed moves
+        this.maxMoves = this.getMaxMoves();
+        // Update points required to win 
+        this.pointsToWin = this.getPointsToWin();
     }
 }
 
