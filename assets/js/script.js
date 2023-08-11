@@ -53,6 +53,7 @@ class SlotMachine {
 
         // Set up event listeners for the spin button, reset button, and the level select
         this.spinButton.addEventListener('click', this.spin.bind(this));
+        this.resetButton.addEventListener('click', this.resetGameNoMsg.bind(this));
         this.resetButton.addEventListener('click', this.resetGame.bind(this));
         this.levelSelect.addEventListener('change', this.updateLevel.bind(this));
 
@@ -155,7 +156,7 @@ class SlotMachine {
             this.showPopup(`You lose! You did not reach ${this.pointsToWin} points within ${this.maxMoves} moves.`);
         }
         // resets the game
-        this.resetGame();
+        this.resetGameNoMsg();
     }
 
     // Callback function to execute after spinning completes
@@ -188,19 +189,33 @@ class SlotMachine {
             else if (this.moves === this.maxMoves) {
                 this.showPopup(`You lose! You did not reach ${this.pointsToWin} points within ${this.maxMoves} moves.`);
                 // Reset the game
-                this.resetGame();
+                this.resetGameNoMsg();
             }
         }
     }
-
-    // Method to reset the game
-    resetGame() {
+    // Method to handle the reset button click
+    resetGameNoMsg() {
+        // Reset the game if the user confirms
         this.points = 0;
         this.moves = 0;
         this.updateMovesDisplay();
         this.updatePointsDisplay();
     }
 
+    // Method to handle the reset button click
+    resetGame() {
+        // Show a confirmation popup before resetting the game
+        this.showPopup("Are you sure you want to reset the game?");
+        const popupOkayButton = document.getElementById("popup-okay");
+        popupOkayButton.addEventListener("click", () => {
+            this.hidePopup();
+            // Reset the game if the user confirms
+            this.points = 0;
+            this.moves = 0;
+            this.updateMovesDisplay();
+            this.updatePointsDisplay();
+        });
+    }
     // Method to update the selected game level
     updateLevel() {
         const newLevel = this.levelSelect.value; // Get the selected level from the dropdown
