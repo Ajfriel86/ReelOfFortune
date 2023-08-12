@@ -1,0 +1,164 @@
+<!-- This is an information tag so the web browser understands exactly what type of document to expect -->
+<!DOCTYPE html>
+
+<!-- This is the root element which defines the whole document and states this is an englisgh document -->
+<html lang="en">
+
+<head>
+    <!-- Meta tags that help to define the metadata of this HTML document -->
+    <!-- utf-8 is a default characrter set used in HTML -->
+    <meta charset="utf-8">
+    <!-- this helps to ensures internet explorer is able to render a web page with the latest rendering engine -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!-- A Favicon is the icon located on the tab document -->
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <!-- Author is ued to tell others who built this html document -->
+    <meta name="author" content="Angus Friel">
+    <!-- Keywords, which are used by serach engines. So more words descirbing the site will result in more information for the search engines -->
+    <meta name="keywords"
+        content="slot machine, gambling, money, cards, poker, reels, fortune, wealth, winning, easy play, multilevels, hard, medium, easy, cash, winner, perfect score">
+    <meta name="description" content="Reel Of Fortune">
+    <!-- The Viewport is the area of the screen where web content is viewed -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Cascading Style Sheet, or CSS, for this html document which is used to style each page -->
+    <link rel="stylesheet" href="assets/css/style.css">
+    <!-- Font awesome is imported for icons used in the footer for this html document -->
+    <script src="https://kit.fontawesome.com/6d30fc82e7.js" crossorigin="anonymous"></script>
+    <!-- Page title which is used to display search results and can be viewed on the window tab -->
+    <title>Reel Of Fortune</title>
+</head>
+
+<body>
+    <header class="header">
+        <h1 class="logo">Reel of Fortune</h1>
+        <!-- This checkbox is used to open/close the hamburger menu when it is activated but it also hidden with css -->
+        <input type="checkbox" id="nav-toggle" class="nav-toggle">
+        <!-- This is the navigation section which is use to go to/view other pages within the HTML document -->
+        <nav>
+            <!-- This is an unordered list, or ul, which hosts the nav links -->
+            <ul>
+                <!-- This is the lists items, or li, which are in the ul -->
+                <li>
+                    <!-- This is an anchor tag, which acts as a link to the home page -->
+                    <a href="index.html" aria-label="Go to the home page to learn the game rules">
+                        Home</a></li>
+                <li>
+                    <!-- This is an anchor tag, which acts as a link to the classes page -->
+                    <a href="game.html" aria-label="Go to the game page to play our slot machine game">
+                        Game
+                    </a>
+                </li>
+        </nav>
+        <!-- This lable works in tandem with the above check box, the 'for' will look for the 'id' in the checkbox and then display the nav bar  -->
+        <label for="nav-toggle" class="nav-toggle-label" aria-label="toggle here to view the navigation menu">
+            <!-- the span is used within the label to display the 3 lines of the hamburger menu -->
+            <span></span>
+        </label>
+    </header>
+
+    <main class="container">
+        <div id="custom-popup" class="popup">
+            <div class="popup-content">
+                <p id="popup-message"></p>
+                <button id="popup-okay" class="popup-button">OK</button>
+            </div>
+        </div>
+        <div class="row">
+            <div class="counter" id="points-display">
+                <h2>Points: 0</h2>
+            </div>
+            <div class="level">
+                <select id="level-select">
+                    <option value="easy">Easy</option>
+                    <option value="medium" selected>Medium (Default)</option>
+                    <option value="hard">Hard</option>
+                </select>
+            </div>
+            <div class="counter" id="moves-display">
+                <h2>Moves: <span id="moves-count">0</span></h2>
+            </div>
+        </div>
+        <div class="slot-machine">
+            <div class="reel" id="reel1"><img id="img1"></div>
+            <div class="reel" id="reel2"><img id="img2"></div>
+            <div class="reel" id="reel3"><img id="img3"></div>
+        </div>
+        <div class="slot-display">
+            <button class="btn" id="spin-button">Spin</button>
+            <button class="btn" id="reset-button">Reset</button>
+        </div>
+    </main>
+    <!-- Footer -->
+    <footer>
+        <!-- Left side of footer for contacting -->
+        <div class="footer-left">
+            <!-- Contact information -->
+            <p>Contact</p>
+            <!-- Unordered list, ul, of the contact information -->
+            <ul>
+                <!-- List item, li, contacting the contact information -->
+                <li>
+                    <!-- Anchor, a, that sends opens an email with the companies email address in it -->
+                    <a href="mailto:angus.friel.1986@gmail.com" target="_top" aria-label="Send us an email">
+                        <!-- Font awesome icon for the email contact informaiton -->
+                        <i class="fa fa-regular fa-envelope" style="color: #ffffff;"></i>
+                        Email
+                    </a>
+                </li>
+                <li>
+                    <!-- Anchor, a, for the phone number of the company -->
+                    <a href="tel:085-12345678" aria-label="give us a call">
+                        <!-- Font awesome icon for a telephone -->
+                        <i class="fa fa-solid fa-phone" style="color: #ffffff;"></i>
+                        085-12345678
+                    </a>
+                </li>
+                <li>
+                    <!-- Anchor, a, that links to a google maps page with a map of the companies location -->
+                    <a href="https://goo.gl/maps/zkAsYinidmJm7thV9" target="_blank"
+                        aria-label="go to google mapos to see where we are">
+                        <!-- Font awesome icon of a location pin -->
+                        <i class="fas fa-map-marker-alt" style="color: #ffffff;"></i>
+                        Games World, Parkmore Business Centre, Galway
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <!-- Right side of foot for social links -->
+        <div class="footer-right">
+            <!-- Social media information -->
+            <p>Social</p>
+            <!-- Unordered list, li, of the social media information -->
+            <ul>
+                <!-- List items that conatin the social media information -->
+                <li>
+                    <!-- Anchor, a, that links to facebook -->
+                    <a href="https://www.facebook.com/" target="_blank" aria-label="Go to out Facebook page">
+                        <!-- Font awesome icon of the facebook logo -->
+                        <i class="fa fa-brands fa-facebook-f" style="color: #ffffff;"></i>
+                        Facebook
+                    </a>
+                </li>
+                <li>
+                    <!-- Anchor, a, that links to instagram -->
+                    <a href="https://www.instagram.com/" target="_blank" aria-label="go to our instagram">
+                        <!-- Font awesome icon of the instagram logo -->
+                        <i class="fa fa-brands fa-instagram" style="color: #ffffff;"></i>
+                        Instagram
+                    </a>
+                </li>
+                <li>
+                    <!-- Anchor, a, that links to youtube -->
+                    <a href="https://www.youtube.com" target="_blank" aria-label="go to our youtube channel">
+                        <i class="fa fa-brands fa-youtube" style="color: #ffffff;"></i>
+                        Youtube
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </footer>
+
+    <script src="assets/js/script.js" async defer></script>
+</body>
+
+</html>
