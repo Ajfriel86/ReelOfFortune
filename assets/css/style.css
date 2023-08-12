@@ -1,36 +1,158 @@
+@import url('https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@500&display=swap');
+
 /* variables for the box-shadow */
 :root {
+    --background: rgba(6, 114, 24, 0.85);
     --box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
+
 }
 
 /* Styling of the body */
 body {
-    display: flex;
-    flex-direction: column;
-    flex-wrap: wrap;
-    justify-content: center;
-    align-items: center;
-    align-content: center;
-    min-height: 100vh;
-    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-    background-image: url('../images/casino.jpg');
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: cover;
+    margin: 0;
+    background: #222;
+    font-family: 'Roboto Mono', monospace;
+    font-weight: 400;
+}
 
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+header {
+    background: var(--background);
+    text-align: center;
+    position: fixed;
+    z-index: 999;
+    width: 100%;
+}
+
+h1 {
+    font-size: 20px;
+    text-align: center;
+}
+
+/* changed this from the tutorial video to
+     allow it to gain focus, making it tabbable */
+.nav-toggle {
+    position: absolute !important;
+    top: -9999px !important;
+    left: -9999px !important;
+}
+
+.nav-toggle:focus~.nav-toggle-label {
+    outline: 3px solid rgba(lightblue, .75);
+}
+
+.nav-toggle-label {
+    position: absolute;
+    top: 0;
+    left: 0;
+    margin-left: 1em;
+    height: 100%;
+    display: flex;
+    align-items: center;
+}
+
+.nav-toggle-label span,
+.nav-toggle-label span::before,
+.nav-toggle-label span::after {
+    display: block;
+    background: white;
+    height: 2px;
+    width: 2em;
+    border-radius: 2px;
+    position: relative;
+}
+
+.nav-toggle-label span::before,
+.nav-toggle-label span::after {
+    content: '';
+    position: absolute;
+}
+
+.nav-toggle-label span::before {
+    bottom: 7px;
+}
+
+.nav-toggle-label span::after {
+    top: 7px;
+}
+
+nav {
+    position: absolute;
+    text-align: left;
+    top: 100%;
+    left: 0;
+    background: var(--background);
+    width: 100%;
+    transform: scale(1, 0);
+    transform-origin: top;
+    transition: transform 400ms ease-in-out;
+}
+
+nav ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+nav li {
+    margin-bottom: 1em;
+    margin-left: 1em;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    font-size: 1.2rem;
+    text-transform: uppercase;
+    opacity: 0;
+    transition: opacity 150ms ease-in-out;
+}
+
+nav a:hover {
+    color: #000;
+}
+
+.nav-toggle:checked~nav {
+    transform: scale(1, 1);
+}
+
+.nav-toggle:checked~nav a {
+    opacity: 1;
+    transition: opacity 250ms ease-in-out 250ms;
+}
+
+h1 {
+    font-family: 'Permanent Marker', cursive;
 }
 
 /* Styling the main container of the game */
 .container {
+    min-height: 100vh;
+    background-image: url(/assets/images/casino.jpg);
+    background-blend-mode: multiply;
+    background-size: cover;
+    display: grid;
+    place-items: center;
     background-color: rgba(228, 18, 25, 0.7);
     border-radius: 15px;
-    border: solid 5px #ffffff;
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-    align-items: center;
-    flex-wrap: wrap;
     box-shadow: var(--box-shadow);
+
+}
+
+.row {
+    margin-top: 10rem;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    width: 100%;
+
 }
 
 /* Styling the points displayed */
@@ -38,16 +160,23 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    flex-direction: row;
-    flex-wrap: wrap;
     background-color: rgb(235, 12, 19);
     border: solid 3px #ffffff;
     border-radius: 15px;
-    width: 10em;
-    height: 3em;
+    width: 10rem;
+    height: 2rem;
     text-align: center;
     margin-bottom: 1rem;
-    margin-top: 1rem;
+    margin-left: 1rem;
+    margin-right: 1rem;
+}
+
+.counter h2 {
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: auto;
 }
 
 /* Styling for the slot machine container */
@@ -65,6 +194,27 @@ body {
     margin-top: 1rem;
 }
 
+.rules {
+    background-color: rgba(236, 10, 17, 0.7);
+    box-shadow: var(--box-shadow);
+    border: solid 3px #ffffff;
+    border-radius: 15px;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-bottom: 1rem;
+    margin-left: 1rem;
+    margin-right: 1rem;
+    margin-top: 1rem;
+    flex-direction: column;
+    align-items: center;
+    padding-bottom: 1rem;
+}
+
+.rules ol li {
+    list-style-type: decimal;
+}
+
 /* Styling the button container */
 .slot-display {
     display: flex;
@@ -77,7 +227,7 @@ body {
 
 /* Styling the images */
 img {
-    width: 50%;
+    width: 40%;
     height: 40%;
 }
 
@@ -88,8 +238,8 @@ img {
     align-items: center;
     flex-direction: row;
     flex-wrap: wrap;
-    width: 200px;
-    height: 200px;
+    width: 7rem;
+    height: 7rem;
     border: 2px solid #333;
     border-radius: 15px;
     margin: 10px;
@@ -101,6 +251,7 @@ img {
 
 /* Styling for the spin button */
 .btn {
+    font-family: 'Roboto Mono', monospace;
     padding: 10px 20px;
     font-size: 1.2rem;
     border-radius: 15px;
@@ -147,21 +298,109 @@ img {
     cursor: pointer;
 }
 
+
+/* Style the footer on every page */
+footer {
+    margin-top: auto;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    background: #000;
+    color: white;
+    width: 100%;
+    padding-bottom: 1rem;
+}
+
+/* style the anchor tag within a list item on the footer of every page */
+footer li a {
+    color: white;
+    text-decoration: none;
+}
+
+/* removes style for an achor tage in a list item on the footerr of every page */
+footer li a:visited {
+    text-decoration: none
+}
+
+/* styles the hover action on an anchor tag of a list item on the footer of every page */
+footer li a:hover {
+    color: white;
+    padding-bottom: 0.1rem;
+    border-bottom-style: solid;
+    border-bottom-width: 0.1rem;
+    width: fit-content;
+}
+
+/* Style the list items */
+li {
+    list-style-type: none;
+    line-height: 2;
+    color: white;
+    cursor: pointer;
+    padding-right: 2rem;
+}
+
+/* Style the unordered list in the footer */
+footer ul {
+    padding: 0;
+    margin: 0;
+}
+
+/* style the paragraphs in the footer */
+footer p {
+    padding: 2em 0 !important;
+}
+
 /* Media queries for smaller screen */
+@media only screen and (max-width: 1200px) {
+
+    .reel {
+        width: 12rem;
+        height: 12rem;
+    }
+
+    .row {
+        margin-top: 5rem;
+    }
+
+}
+
 @media only screen and (max-width: 800px) {
 
-    .points {
-        width: 5em;
+    h1 {
+        font-size: 17px;
+    }
+
+    .row {
+        margin-top: 4rem;
+        flex-wrap: wrap;
+
+    }
+
+    .counter {
+        font-size: 10px;
+        width: 10em;
         height: 2em;
-        font-size: 15px;
         margin-bottom: .2rem;
         margin-top: .2rem;
         border: solid 1px #ffffff;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+    }
+
+    .counter h2 {
+        font-size: 13px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
     }
 
     .reel {
-        width: 100px;
-        height: 100px;
+        width: 150px;
+        height: 150px;
         margin: 7px;
 
     }
@@ -176,5 +415,87 @@ img {
     .btn {
         padding: 5px 10px;
         font-size: .8rem;
+    }
+
+
+    footer {
+        font-size: 9px;
+        padding-left: 0.5rem;
+    }
+}
+
+@media only screen and (max-width: 670px) {
+    .reel {
+        width: 120px;
+        height: 120px;
+    }
+}
+
+@media only screen and (max-width: 400px) {
+    .row {
+        flex-direction: column;
+    }
+
+}
+
+@media screen and (min-width: 800px) {
+    .nav-toggle-label {
+        display: none;
+    }
+
+    header {
+        display: grid;
+        grid-template-columns: 1fr auto minmax(600px, 3fr) 1fr;
+    }
+
+    .logo {
+        grid-column: 2 / 3;
+    }
+
+    nav {
+        position: relative;
+        text-align: left;
+        transition: none;
+        transform: scale(1, 1);
+        background: none;
+        top: initial;
+        left: initial;
+        /* end Edge support stuff */
+
+        grid-column: 3 / 4;
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+    }
+
+    nav ul {
+        display: flex;
+    }
+
+    nav li {
+        margin-left: 3em;
+        margin-bottom: 0;
+    }
+
+    nav a {
+        opacity: 1;
+        position: relative;
+    }
+
+    nav a::before {
+        content: '';
+        display: block;
+        height: 5px;
+        background: black;
+        position: absolute;
+        top: -.75em;
+        left: 0;
+        right: 0;
+        transform: scale(0, 1);
+        transition: transform ease-in-out 250ms;
+    }
+
+    nav a:hover::before {
+        transform: scale(1, 1);
     }
 }
