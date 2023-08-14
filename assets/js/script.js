@@ -1,3 +1,5 @@
+/* jshint esversion: 8 */
+
 // Define the Reel class for handling individual reels
 class Reel {
     // Constructor for the identifier and callback
@@ -57,6 +59,7 @@ class SlotMachine {
         this.points = 0;
         // this tracks the number of completed spins
         this.completedSpins = 0;
+
         // This represents the max number of points needed for a user to win depending on the level of the game selcted
         this.pointsToWin = this.getPointsToWin();
         // This retrieves the HTML element moves-display and assigns it to the property movesDispaly 
@@ -83,8 +86,6 @@ class SlotMachine {
         // Set default level and initialize reels
         // This is in reference to the selected level by the user, this will set the value picked by the user and then apply that to the game
         this.levelSelect.value = this.level;
-        // This calls the method setUpReels() that spins the all three reels using a for loop and adds them to the array 'reels[]'
-        this.setupReels();
         // This calls the method updatePointsDisplay, which will update the on screen value of the points earned by the user
         this.updatePointsDisplay();
         // This calls the method updateMovesDispaly, which will update the on screen display of moves taken by a user
@@ -177,8 +178,6 @@ class SlotMachine {
         this.moves++;
         // Update the moves
         this.updateMovesDisplay()
-        // This listens for an image to be loaded into the reel
-        this.imageElement.addEventListener('load', this.callback.bind(this));
         // Check if the game is still active
         if (this.moves <= this.maxMoves) {
             // Check for win or lose condition
@@ -264,6 +263,8 @@ class SlotMachine {
         this.reels.forEach(reel => {
             reel.imageElement.src = '/assets/images/' + reel.defaultImage;
         });
+        // Grey's out the reset button if the game is not played or just reset recently
+        this.resetButton.disabled = false;
     }
 
     // Method to handle the reset button click with confirmation
@@ -286,6 +287,8 @@ class SlotMachine {
             // This updates the points on screen to reflect them being reset to zero
             this.updatePointsDisplay();
         });
+        // Grey's out the reset button if the game is not played or just reset recently
+        this.resetButton.disabled = false;
     }
     // Method to update the selected game level
     updateLevel() {
@@ -300,68 +303,5 @@ class SlotMachine {
     }
 }
 
-// Define the FormValidation class for handling form validation
-class FormValidation {
-    constructor() {
-        this.form = document.getElementById('contact-form');
-        this.form.addEventListener('submit', this.validate.bind(this));
-    }
-
-    validate(event) {
-        event.preventDefault();
-
-        const firstName = document.getElementById('fname');
-        const lastName = document.getElementById('lname');
-        const email = document.getElementById('email');
-        const phone = document.getElementById('pnum');
-        const subject = document.getElementById('subject');
-
-        const errors = [];
-
-        if (firstName.value.trim() === '') {
-            errors.push('First Name is required');
-        }
-
-        if (lastName.value.trim() === '') {
-            errors.push('Last Name is required');
-        }
-
-        const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        if (!emailPattern.test(email.value)) {
-            errors.push('Invalid email format');
-        }
-
-        const phonePattern = /^\d{10}$/;
-        if (phone.value.trim() !== '' && !phonePattern.test(phone.value)) {
-            errors.push('Invalid phone number format');
-        }
-
-        if (subject.value.trim() === '') {
-            errors.push('Subject is required');
-        }
-
-        if (errors.length > 0) {
-            const errorContainer = document.getElementById('error-container');
-            errorContainer.innerHTML = '';
-            const errorList = document.createElement('ul');
-            errors.forEach(error => {
-                const listItem = document.createElement('li');
-                listItem.textContent = error;
-                errorList.appendChild(listItem);
-            });
-            errorContainer.appendChild(errorList);
-        } else {
-            // Form is valid, submit it
-            this.form.submit();
-        }
-    }
-}
-
-// Function to run after the document is fully loaded
-document.addEventListener("DOMContentLoaded", function () {
-    // Create an instance of the SlotMachine class with the default level 'medium'
-    const slotMachine = new SlotMachine('medium');
-
-    // Create an instance of the FormValidation class
-    const formValidation = new FormValidation();
-});
+// Create an instance of the SlotMachine class with the default level 'medium'
+const slotMachine = new SlotMachine('medium');
