@@ -59,7 +59,6 @@ class SlotMachine {
         this.points = 0;
         // this tracks the number of completed spins
         this.completedSpins = 0;
-
         // This represents the max number of points needed for a user to win depending on the level of the game selcted
         this.pointsToWin = this.getPointsToWin();
         // This retrieves the HTML element moves-display and assigns it to the property movesDispaly 
@@ -70,6 +69,10 @@ class SlotMachine {
         this.spinButton = document.getElementById('spin-button');
         // This retrieves the HTML element rest-button and assigns it to the property restButton
         this.resetButton = document.getElementById('reset-button');
+        // Greying out hte reset button if its not in use
+        this.resetButton.disabled = true;
+        // Add the disabled-button class
+        this.resetButton.classList.add('disabled-button');
         // This retrieves the HTML element level-select and assigns it the proerpty levelSelect
         this.levelSelect = document.getElementById('level-select');
 
@@ -82,6 +85,8 @@ class SlotMachine {
         this.resetButton.addEventListener('click', this.resetGame.bind(this));
         // This refers to the HTML element level-select, the event is listening for the click on this button and will bind that click to the JS proerpty levelSelect
         this.levelSelect.addEventListener('change', this.updateLevel.bind(this));
+
+        this.spinButton.addEventListener('click', this.enableResetButton.bind(this));
 
         // Set default level and initialize reels
         // This is in reference to the selected level by the user, this will set the value picked by the user and then apply that to the game
@@ -248,6 +253,13 @@ class SlotMachine {
             }
         }
     }
+    // Method to enable the reset button when the spin button is clicked
+    enableResetButton() {
+        // Enable the reset button
+        this.resetButton.disabled = false;
+        // Remove the 'disabled-button' class
+        this.resetButton.classList.remove('disabled-button');
+    }
     // Method to handle a reset with no confirmation
     resetGameNoMsg() {
         // Reset the games points & moves if the user confirms
@@ -259,12 +271,11 @@ class SlotMachine {
         this.updateMovesDisplay();
         // This updates the points on screen to reflect them being reset to zero
         this.updatePointsDisplay();
-
+        this.resetButton.disabled = true;
+        this.resetButton.classList.add('disabled-button');
         this.reels.forEach(reel => {
             reel.imageElement.src = '/assets/images/' + reel.defaultImage;
         });
-        // Grey's out the reset button if the game is not played or just reset recently
-        this.resetButton.disabled = false;
     }
 
     // Method to handle the reset button click with confirmation
@@ -286,9 +297,11 @@ class SlotMachine {
             this.updateMovesDisplay();
             // This updates the points on screen to reflect them being reset to zero
             this.updatePointsDisplay();
+            // Grey's out the reset button if the game is not played or just reset recently
+            this.resetButton.disabled = true;
+            this.resetButton.classList.add('disabled-button');
         });
-        // Grey's out the reset button if the game is not played or just reset recently
-        this.resetButton.disabled = false;
+
     }
     // Method to update the selected game level
     updateLevel() {
@@ -301,6 +314,8 @@ class SlotMachine {
         // Update points required to win 
         this.pointsToWin = this.getPointsToWin();
     }
+
+
 }
 
 // Create an instance of the SlotMachine class with the default level 'medium'
