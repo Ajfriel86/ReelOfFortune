@@ -13,7 +13,6 @@ body {
     margin: 0;
     background: #222;
     font-family: 'Roboto Mono', monospace;
-    font-weight: 400;
 }
 
 *,
@@ -152,6 +151,7 @@ h1 {
     flex-wrap: wrap;
     justify-content: center;
     width: 100%;
+    align-items: center;
 
 }
 
@@ -163,12 +163,13 @@ h1 {
     background-color: rgb(235, 12, 19);
     border: solid 3px #ffffff;
     border-radius: 15px;
-    width: 10rem;
-    height: 2rem;
+    width: 15rem;
+    height: 5rem;
     text-align: center;
     margin-bottom: 1rem;
     margin-left: 1rem;
     margin-right: 1rem;
+    font-size: 2rem;
 }
 
 .counter h2 {
@@ -177,6 +178,10 @@ h1 {
     justify-content: center;
     align-items: center;
     margin: auto;
+}
+
+.level-select {
+    font-size: 2rem;
 }
 
 /* Styling for the slot machine container */
@@ -205,14 +210,26 @@ h1 {
     margin-bottom: 1rem;
     margin-left: 1rem;
     margin-right: 1rem;
-    margin-top: 1rem;
+    margin-top: 5rem;
     flex-direction: column;
     align-items: center;
-    padding-bottom: 1rem;
+    padding: 2rem;
+    font-size: 2rem;
 }
 
 .rules ol li {
     list-style-type: decimal;
+}
+
+.contact-form {
+    background-color: rgba(236, 10, 17, 0.7);
+    box-shadow: var(--box-shadow);
+    border: solid 3px #ffffff;
+    border-radius: 15px;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    flex-direction: column;
 }
 
 /* Styling the button container */
@@ -238,8 +255,8 @@ img {
     align-items: center;
     flex-direction: row;
     flex-wrap: wrap;
-    width: 7rem;
-    height: 7rem;
+    width: 25rem;
+    height: 25rem;
     border: 2px solid #333;
     border-radius: 15px;
     margin: 10px;
@@ -253,7 +270,7 @@ img {
 .btn {
     font-family: 'Roboto Mono', monospace;
     padding: 10px 20px;
-    font-size: 1.2rem;
+    font-size: 3rem;
     border-radius: 15px;
     background-color: #3498db;
     color: #000000;
@@ -298,6 +315,34 @@ img {
     cursor: pointer;
 }
 
+.form-item {
+    display: flex;
+    flex-direction: column;
+}
+
+form {
+    display: grid;
+    padding: 1em;
+    background: #f9f9f9;
+    padding: 1em;
+    border-radius: 15px;
+}
+
+.error {
+    color: red;
+    /* Set the text color to red */
+    font-size: 14px;
+    /* Set the font size */
+    margin-top: 5px;
+    /* Add some margin space at the top */
+}
+
+/* Unicode code point is U+26A0.  */
+.error::before {
+    content: "⚠ ";
+    /* Display a warning icon before the error message */
+    font-weight: bold;
+}
 
 /* Style the footer on every page */
 footer {
@@ -352,7 +397,8 @@ footer p {
 }
 
 /* Media queries for smaller screen */
-@media only screen and (max-width: 1200px) {
+@media only screen and (max-width: 1280px),
+screen and (max-height:800px) {
 
     .reel {
         width: 12rem;
@@ -363,9 +409,23 @@ footer p {
         margin-top: 5rem;
     }
 
+    .level-select {
+        font-size: 1.1rem;
+    }
+
+    .counter {
+        width: 8rem;
+        height: 2rem;
+        font-size: 1rem;
+    }
+
+    .btn {
+        font-size: 1rem;
+    }
 }
 
-@media only screen and (max-width: 800px) {
+@media only screen and (max-width: 1024px),
+screen and (max-height:768px) {
 
     h1 {
         font-size: 17px;
@@ -377,8 +437,12 @@ footer p {
 
     }
 
+    .level-select {
+        font-size: 1rem;
+    }
+
     .counter {
-        font-size: 10px;
+        font-size: 15px;
         width: 10em;
         height: 2em;
         margin-bottom: .2rem;
@@ -399,8 +463,8 @@ footer p {
     }
 
     .reel {
-        width: 150px;
-        height: 150px;
+        width: 200px;
+        height: 200px;
         margin: 7px;
 
     }
@@ -414,7 +478,7 @@ footer p {
 
     .btn {
         padding: 5px 10px;
-        font-size: .8rem;
+        font-size: 2rem;
     }
 
 
@@ -424,10 +488,24 @@ footer p {
     }
 }
 
-@media only screen and (max-width: 670px) {
+@media only screen and (max-width: 800px),
+screen and (max-height:480px) {
     .reel {
         width: 120px;
         height: 120px;
+    }
+
+    .level-select {
+        font-size: .8rem;
+    }
+
+    .btn {
+        font-size: 1rem;
+    }
+
+    .counter {
+        font-size: .8rem;
+        width: 6rem;
     }
 }
 
