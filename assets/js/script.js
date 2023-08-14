@@ -4,7 +4,9 @@ class Reel {
     constructor(id, callback) {
         // Identifier for the reel
         this.id = id;
-        // Array of images
+        // This is hte default image that will be displayed at the start of a game or when the game is reset
+        this.defaultImage = 'x.png'
+        // This is an Array of images to be used for the reels
         this.images = ['orange.png', 'lemon.png', 'grape.png', 'diamond.png', 'cherry.png', 'bell.png', '7.jpg', ];
         // Getting the 'reel*' id from the html doc
         this.element = document.getElementById(`reel${id}`);
@@ -16,6 +18,8 @@ class Reel {
 
     // Method to spin the reel
     spin() {
+        // 
+        this.imageElement.src = '/assets/images/' + this.defaultImage;
         // creating a variable for a random index, Math.floor rounds fdown to the nearest integer, and Math.random generates a random number and chooses this from the selection (or lenght/amount) of images
         const randomIndex = Math.floor(Math.random() * this.images.length);
         // Creates a variable to locate the images in their folder and assigns the images to the randomIndex above
@@ -41,6 +45,10 @@ class SlotMachine {
         // Initializes properties such as arrays, the level of the game, moves, maxMoves, points to win, then connects JS elements to their HTML counter-parts
         // Initializes an empty array. This array is intended to store instances of the Reel class.
         this.level = level;
+        // this is an empty array that is assigned to the property reels and is used to initialize and store the instance of the Reel class 
+        this.reels = [];
+        // This sets up all 3 reels for the game and will help to display the default image
+        this.setupReels();
         // This is used to track the number of moves a user had made, starting at 0
         this.moves = 0;
         // This represents the max number of moves a player can take depending on the level of the game selected
@@ -111,6 +119,8 @@ class SlotMachine {
             const reel = new Reel(i, this.spinCompleteCallback.bind(this));
             // Adds the reel to the reels array
             this.reels.push(reel);
+            // sets the default image on each reel
+            reel.imageElement.src = '/assets/images/' + reel.defaultImage;
         }
     }
 
@@ -235,6 +245,10 @@ class SlotMachine {
         this.updateMovesDisplay();
         // This updates the points on screen to reflect them being reset to zero
         this.updatePointsDisplay();
+
+        this.reels.forEach(reel => {
+            reel.imageElement.src = '/assets/images/' + reel.defaultImage;
+        });
     }
 
     // Method to handle the reset button click with confirmation
@@ -271,5 +285,68 @@ class SlotMachine {
     }
 }
 
-// Create a new instance of the SlotMachine class with the default level 'medium'
-const slotMachine = new SlotMachine('medium');
+// Define the FormValidation class for handling form validation
+class FormValidation {
+    constructor() {
+        this.form = document.getElementById('contact-form');
+        this.form.addEventListener('submit', this.validate.bind(this));
+    }
+
+    validate(event) {
+        event.preventDefault();
+
+        const firstName = document.getElementById('fname');
+        const lastName = document.getElementById('lname');
+        const email = document.getElementById('email');
+        const phone = document.getElementById('pnum');
+        const subject = document.getElementById('subject');
+
+        const errors = [];
+
+        if (firstName.value.trim() === '') {
+            errors.push('First Name is required');
+        }
+
+        if (lastName.value.trim() === '') {
+            errors.push('Last Name is required');
+        }
+
+        const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailPattern.test(email.value)) {
+            errors.push('Invalid email format');
+        }
+
+        const phonePattern = /^\d{10}$/;
+        if (phone.value.trim() !== '' && !phonePattern.test(phone.value)) {
+            errors.push('Invalid phone number format');
+        }
+
+        if (subject.value.trim() === '') {
+            errors.push('Subject is required');
+        }
+
+        if (errors.length > 0) {
+            const errorContainer = document.getElementById('error-container');
+            errorContainer.innerHTML = '';
+            const errorList = document.createElement('ul');
+            errors.forEach(error => {
+                const listItem = document.createElement('li');
+                listItem.textContent = error;
+                errorList.appendChild(listItem);
+            });
+            errorContainer.appendChild(errorList);
+        } else {
+            // Form is valid, submit it
+            this.form.submit();
+        }
+    }
+}
+
+// Function to run after the document is fully loaded
+document.addEventListener("DOMContentLoaded", function () {
+    // Create an instance of the SlotMachine class with the default level 'medium'
+    const slotMachine = new SlotMachine('medium');
+
+    // Create an instance of the FormValidation class
+    const formValidation = new FormValidation();
+});
