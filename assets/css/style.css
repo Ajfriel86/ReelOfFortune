@@ -131,7 +131,7 @@ h1 {
 }
 
 /* Styling the main container of the game */
-.container {
+.main-container {
     min-height: 100vh;
     background-image: url(/assets/images/casino.jpg);
     background-blend-mode: multiply;
@@ -144,7 +144,7 @@ h1 {
 
 }
 
-.row {
+.add-row {
     margin-top: 10rem;
     display: flex;
     flex-direction: row;

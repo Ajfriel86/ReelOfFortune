@@ -97,7 +97,7 @@
 
     + [HTML](https://developer.mozilla.org/en-US/docs/Web/HTML): The markup language used to create the website
     + [CSS](https://developer.mozilla.org/en-US/docs/Web/css): The styling language used to style the website
-    +[JavaScript](https://developer.mozilla.org/en-US/docs/Web/JavaScript) This was the main language used to create the game and for the form validation on the contact page
+    + [JavaScript](https://developer.mozilla.org/en-US/docs/Web/JavaScript) This was the main language used to create the game and for the form validation on the contact page
 
 - ### Other tools:
 
@@ -187,7 +187,7 @@ This website was constructed in VS Code and deployed on GitHub. The steps taken 
 
 - Log into GitHub
 - Go to the list of repositories on the left-hand side of the screen
-- Click on the repository - [PillatesParadise](https://ajfriel86.github.io/ReelOfFortune/)
+- Click on the repository - [Reel Of Fortune](https://ajfriel86.github.io/ReelOfFortune/)
 - Choose the settings tab from the menu items across the top of the page; it is the 9th tab on the menu items list.
 - Under 'Code and automation,' the last choice on the list is 'Pages'
 - In the 'Source' section, choose 'Deploy from a branch'
