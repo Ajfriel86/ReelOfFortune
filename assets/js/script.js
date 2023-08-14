@@ -23,7 +23,7 @@ class Reel {
         // creating a variable for a random index, Math.floor rounds fdown to the nearest integer, and Math.random generates a random number and chooses this from the selection (or lenght/amount) of images
         const randomIndex = Math.floor(Math.random() * this.images.length);
         // Creates a variable to locate the images in their folder and assigns the images to the randomIndex above
-        const imagePath = './assets/images/' + this.images[randomIndex];
+        const imagePath = '/assets/images/' + this.images[randomIndex];
         // Create a new load event listener and store it in a variable
         const loadListener = () => {
             // Removing the listener after it has been triggered ensures the callback is only called once per spin (as I was having errors with repeated call backs)
@@ -55,6 +55,8 @@ class SlotMachine {
         this.maxMoves = this.getMaxMoves();
         // This is used to track the number of points a user needs in order to win the game, starting at 0
         this.points = 0;
+        // this tracks the number of completed spins
+        this.completedSpins = 0;
         // This represents the max number of points needed for a user to win depending on the level of the game selcted
         this.pointsToWin = this.getPointsToWin();
         // This retrieves the HTML element moves-display and assigns it to the property movesDispaly 
@@ -175,6 +177,8 @@ class SlotMachine {
         this.moves++;
         // Update the moves
         this.updateMovesDisplay()
+        // This listens for an image to be loaded into the reel
+        this.imageElement.addEventListener('load', this.callback.bind(this));
         // Check if the game is still active
         if (this.moves <= this.maxMoves) {
             // Check for win or lose condition
@@ -202,8 +206,18 @@ class SlotMachine {
 
     // Callback function to execute after spinning completes
     spinCompleteCallback() {
+        // THis increases the spin count
+        this.completedSpins++;
         // If statement to check for a win condition after every move
         if (this.moves > 0) {
+            console.log("Checking win condition1");
+            // Check for a win condition after all reels have stopped spinning
+            this.checkWinCondition();
+        }
+        // Check to see if all reels have finished spinning
+        if (this.completedSpins === this.reels.length) {
+            // Reset completed spins count
+            this.completedSpins = 0;
             // Check for a win condition after all reels have stopped spinning
             this.checkWinCondition();
         }
@@ -211,6 +225,7 @@ class SlotMachine {
 
     // Method to check for a win condition
     checkWinCondition() {
+        console.log("Checking win condition2");
         // Get image paths from the reels
         const imagePaths = this.reels.map(reel => reel.imageElement.src);
         // If statement to check if all thee images match and if they do, the user gets 100 points, the points displayed is updated, a pop tells the user they matched the images 
@@ -222,7 +237,7 @@ class SlotMachine {
             //  a pop tells the user they matched the images 
             this.showPopup('Congratulations! You have a three-of-a-kind win! Points: ' + this.points);
             // If statement to see if the points gained are greater than or equalt to the points to win AND if the moves made are less than or equal to the max moves to win
-            if (this.points >= this.pointsToWin && this.moves <= this.maxMoves) {
+            if (this.points >= this.pointsToWin) {
                 // if points and moves are met a popup tells the user they won
                 this.showPopup(`You win! You reached ${this.pointsToWin} points within ${this.maxMoves} moves.`);
             }
