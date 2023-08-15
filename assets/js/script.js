@@ -21,11 +21,11 @@ class Reel {
     // Method to spin the reel
     spin() {
         // 
-        this.imageElement.src = './assets/images/' + this.defaultImage;
+        this.imageElement.src = 'assets/images/' + this.defaultImage;
         // creating a variable for a random index, Math.floor rounds fdown to the nearest integer, and Math.random generates a random number and chooses this from the selection (or lenght/amount) of images
         const randomIndex = Math.floor(Math.random() * this.images.length);
         // Creates a variable to locate the images in their folder and assigns the images to the randomIndex above
-        const imagePath = './assets/images/' + this.images[randomIndex];
+        const imagePath = 'assets/images/' + this.images[randomIndex];
         // Create a new load event listener and store it in a variable
         const loadListener = () => {
             // Removing the listener after it has been triggered ensures the callback is only called once per spin (as I was having errors with repeated call backs)
@@ -154,7 +154,7 @@ class SlotMachine {
             // Adds the reel to the reels array
             this.reels.push(reel);
             // sets the default image on each reel
-            reel.imageElement.src = './assets/images/' + reel.defaultImage;
+            reel.imageElement.src = 'assets/images/' + reel.defaultImage;
         }
     }
 
@@ -301,7 +301,7 @@ class SlotMachine {
         this.resetButton.disabled = true;
         this.resetButton.classList.add('disabled-button');
         this.reels.forEach(reel => {
-            reel.imageElement.src = './assets/images/' + reel.defaultImage;
+            reel.imageElement.src = 'assets/images/' + reel.defaultImage;
         });
     }
 
