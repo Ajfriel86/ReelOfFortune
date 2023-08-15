@@ -80,8 +80,6 @@ class SlotMachine {
         // This refers to the HTML element spin-button, the event is listening for the click on this button and will bind that click to the JS proerpty spinButton
         this.spinButton.addEventListener('click', this.spin.bind(this));
         // This refers to the HTML element reset-button, the event is listening for the click on this button and will bind that click to the JS proerpty resetButton
-        this.resetButton.addEventListener('click', this.resetGameNoMsg.bind(this));
-        // This refers to the HTML element reset-button, the event is listening for the click on this button and will bind that click to the JS proerpty resetButton
         this.resetButton.addEventListener('click', this.resetGame.bind(this));
         // This refers to the HTML element level-select, the event is listening for the click on this button and will bind that click to the JS proerpty levelSelect
         this.levelSelect.addEventListener('change', this.updateLevel.bind(this));
@@ -123,20 +121,16 @@ class SlotMachine {
         });
 
     }
-    // Method for Custom popup messages instead of alrets
+    // Method for Custom popup messages instead of alerts
     showPopup(message) {
         // This retrieves the HTML element custom-popup and assigns it to the local variable popup 
         const popup = document.getElementById('custom-popup');
         // This retrieves the HTML element popup-message and assigns it to the local variable popupMessage
         const popupMessage = document.getElementById('popup-message');
-        // This thats the popupMessage varible, and updates the text within it, the 'messgae' is used as a variable to store the current message being dispalyed
+        // This updates the popupMessage variable, and updates the text within it using the 'message' parameter
         popupMessage.innerText = message;
         // This assigns the CSS property of 'flex' to the popup window
         popup.style.display = 'flex';
-        // This refers to the HTML element popup-okay, which is the button on the popup, and assigns it to the local variable popupOkayButton
-        const popupOkayButton = document.getElementById('popup-okay');
-        // This then takes the popupOkayButton and the event listens for the click that will then bind this JS proeproty to the HTML elemet counterpart  
-        popupOkayButton.addEventListener('click', this.hidePopup.bind(this));
     }
     // Method to hide the pop up
     hidePopup() {
@@ -307,28 +301,44 @@ class SlotMachine {
 
     // Method to handle the reset button click with confirmation
     resetGame() {
-        // Show a confirmation popup before resetting the game
-        this.showPopup("Are you sure you want to reset the game?");
-        // This refers to the HTML elemenet popup-okay, which assigns it othe JS property popupOkayButton
-        const popupOkayButton = document.getElementById("popup-okay");
-        // The event listener then listens for the button click
-        popupOkayButton.addEventListener("click", () => {
-            // The popup is then hidden and the game resets
-            this.hidePopup();
-            // Reset the games points & moves if the user confirms
-            // This sets the points back to zero
-            this.points = 0;
-            // This sets the moves back to zero
-            this.moves = 0;
-            // This updates the moves on screen to reflect them being reset to zero
-            this.updateMovesDisplay();
-            // This updates the points on screen to reflect them being reset to zero
-            this.updatePointsDisplay();
-            // Grey's out the reset button if the game is not played or just reset recently
-            this.resetButton.disabled = true;
-            this.resetButton.classList.add('disabled-button');
-        });
+        // Add event listener for the reset button
+        this.resetButton.addEventListener('click', event => {
+            // Prevent the default behavior of the reset button
+            event.preventDefault();
 
+            // Show a confirmation popup before resetting the game
+            this.showPopup("Are you sure you want to reset the game?");
+
+            // Add event listeners for Yes and No buttons in the popup
+            const popupYesButton = document.getElementById('popup-yes');
+            const popupNoButton = document.getElementById('popup-no');
+
+            popupYesButton.addEventListener('click', () => {
+                // Hide the popup
+                this.hidePopup();
+                // Reset the game
+                this.performReset();
+            });
+
+            popupNoButton.addEventListener('click', () => {
+                // Hide the popup
+                this.hidePopup();
+            });
+        });
+    }
+
+    // Method to perform the actual reset
+    performReset() {
+        // Reset the games points & moves if the user confirms
+        this.points = 0;
+        this.moves = 0;
+        this.updateMovesDisplay();
+        this.updatePointsDisplay();
+        this.resetButton.disabled = true;
+        this.resetButton.classList.add('disabled-button');
+        this.reels.forEach(reel => {
+            reel.imageElement.src = 'assets/images/' + reel.defaultImage;
+        });
     }
     // Method to update the selected game level
     updateLevel() {
