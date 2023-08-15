@@ -1,10 +1,15 @@
+/* importing google fonts */
 @import url('https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@500&display=swap');
 
-/* variables for the box-shadow */
+/* variables for consistent colour */
 :root {
     --background: rgba(6, 114, 24, 0.85);
     --box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
+    --background-color: rgba(228, 18, 25, 0.7);
+    --button-blue: rgb(70, 187, 255);
+    --border-white: rgba(255, 255, 255, 1);
+    --green: rgba(10, 247, 73, 0.7);
 
 }
 
@@ -15,12 +20,14 @@ body {
     font-family: 'Roboto Mono', monospace;
 }
 
+/* this is a universal indicator to add a border box on the hamburger menu when check on/off - before/after */
 *,
 *::before,
 *::after {
     box-sizing: border-box;
 }
 
+/* Styling the hearder */
 header {
     background: var(--background);
     text-align: center;
@@ -29,23 +36,25 @@ header {
     width: 100%;
 }
 
+/* Styling the h1's */
 h1 {
-    font-size: 20px;
     text-align: center;
+    font-family: 'Permanent Marker', cursive;
 }
 
-/* changed this from the tutorial video to
-     allow it to gain focus, making it tabbable */
+/* Styling the navigation bar */
 .nav-toggle {
     position: absolute !important;
     top: -9999px !important;
     left: -9999px !important;
 }
 
+/* Styling the color of the hamburger menu */
 .nav-toggle:focus~.nav-toggle-label {
-    outline: 3px solid rgba(lightblue, .75);
+    outline: 3px solid var(--border-white);
 }
 
+/* Styling/positioning the label used for the hamburger menu */
 .nav-toggle-label {
     position: absolute;
     top: 0;
@@ -56,34 +65,39 @@ h1 {
     align-items: center;
 }
 
+/* Styling used to dispaly 3 lines of the hamburger menu */
 .nav-toggle-label span,
 .nav-toggle-label span::before,
 .nav-toggle-label span::after {
     display: block;
-    background: white;
+    background: var(--border-white);
     height: 2px;
     width: 2em;
     border-radius: 2px;
     position: relative;
 }
 
+/*  creates the 1st lines in the hamburger menu and positions them */
 .nav-toggle-label span::before,
 .nav-toggle-label span::after {
     content: '';
     position: absolute;
 }
 
+/*  creates the 2nd lines in the hamburger menu */
 .nav-toggle-label span::before {
     bottom: 7px;
 }
 
+/*  creates the 3rd lines in the hamburger menu */
 .nav-toggle-label span::after {
     top: 7px;
 }
 
+/* Stlyes the nav bar for both hamburger menu and regular nav bar, the transforms are for the hamburger menu */
 nav {
     position: absolute;
-    text-align: left;
+    text-align: right;
     top: 100%;
     left: 0;
     background: var(--background);
@@ -93,19 +107,22 @@ nav {
     transition: transform 400ms ease-in-out;
 }
 
+/* Style of the unordered list of the nav bar */
 nav ul {
     margin: 0;
     padding: 0;
     list-style: none;
 }
 
+/* Style for the list items in the nav bar */
 nav li {
     margin-bottom: 1em;
     margin-left: 1em;
 }
 
+/* Style for the anchor tags in the nav bar and hamburger menu */
 nav a {
-    color: white;
+    color: var(--border-white);
     text-decoration: none;
     font-size: 1.2rem;
     text-transform: uppercase;
@@ -113,21 +130,21 @@ nav a {
     transition: opacity 150ms ease-in-out;
 }
 
+/* When the end user hovers the cursor over an achor tag in the nav bar the colour will change */
 nav a:hover {
     color: #000;
 }
 
+/* This is used to scale the hamburger menu when it is clicked */
 .nav-toggle:checked~nav {
     transform: scale(1, 1);
 }
 
+/* This targets the anchor tag in the nav when it is checked and helps with the transition when viewing the hamgurger menu */
+
 .nav-toggle:checked~nav a {
     opacity: 1;
     transition: opacity 250ms ease-in-out 250ms;
-}
-
-h1 {
-    font-family: 'Permanent Marker', cursive;
 }
 
 /* Styling the main container of the game */
@@ -138,12 +155,14 @@ h1 {
     background-size: cover;
     display: grid;
     place-items: center;
-    background-color: rgba(228, 18, 25, 0.7);
+    background-color: var(--background-color);
     border-radius: 15px;
     box-shadow: var(--box-shadow);
+    padding-top: 5em;
 
 }
 
+/* Styling the points/moves counters so they stay in rows and not cols */
 .add-row {
     margin-top: 10rem;
     display: flex;
@@ -155,13 +174,13 @@ h1 {
 
 }
 
-/* Styling the points displayed */
+/* Styling the points/moves displayed */
 .counter {
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: rgb(235, 12, 19);
-    border: solid 3px #ffffff;
+    background-color: var(--background-color);
+    border: solid 3px var(--border-white);
     border-radius: 15px;
     width: 15rem;
     height: 5rem;
@@ -172,6 +191,7 @@ h1 {
     font-size: 2rem;
 }
 
+/* Styling the h2 within the points/move display */
 .counter h2 {
     text-align: center;
     display: flex;
@@ -180,15 +200,16 @@ h1 {
     margin: auto;
 }
 
+/* Styling the font size in the level selcet menu */
 .level-select {
     font-size: 2rem;
 }
 
 /* Styling for the slot machine container */
 .slot-machine {
-    background-color: rgba(236, 10, 17, 0.7);
+    background-color: var(--background-color);
     box-shadow: var(--box-shadow);
-    border: solid 3px #ffffff;
+    border: solid 3px var(--border-white);
     border-radius: 15px;
     display: flex;
     justify-content: center;
@@ -199,10 +220,11 @@ h1 {
     margin-top: 1rem;
 }
 
+/* Styling the rules container on the home page */
 .rules {
-    background-color: rgba(236, 10, 17, 0.7);
+    background-color: rgbavar(--background-color);
     box-shadow: var(--box-shadow);
-    border: solid 3px #ffffff;
+    border: solid 3px var(--border-white);
     border-radius: 15px;
     display: flex;
     justify-content: center;
@@ -217,14 +239,16 @@ h1 {
     font-size: 2rem;
 }
 
+/* Styling the list items, in the ordered list, of the rules container, on the home page */
 .rules ol li {
     list-style-type: decimal;
 }
 
+/* Styling the contact form */
 .contact-form {
-    background-color: rgba(236, 10, 17, 0.7);
+    background-color: var(--background-color);
     box-shadow: var(--box-shadow);
-    border: solid 3px #ffffff;
+    border: solid 3px var(--border-white);
     border-radius: 15px;
     display: flex;
     justify-content: center;
@@ -262,8 +286,8 @@ img {
     margin: 10px;
     object-fit: contain;
     box-shadow: var(--box-shadow);
-    background-color: rgba(10, 247, 73, 0.7);
-    border: solid 3px #ffffff;
+    background-color: var(--background);
+    border: solid 3px var(--border-white);
 }
 
 /* Styling for the spin button */
@@ -272,16 +296,26 @@ img {
     padding: 10px 20px;
     font-size: 3rem;
     border-radius: 15px;
-    background-color: #3498db;
+    background-color: var(--button-blue);
     color: #000000;
     border: none;
     cursor: pointer;
     box-shadow: var(--box-shadow);
 }
 
-/* Add this in your CSS stylesheet */
+/* Styling the hover action on the buttons */
+.btn:hover {
+    color: var(--border-white);
+}
 
-/* Add this to your CSS */
+/* Styling the reset button when its disabled */
+.disabled-button {
+    background-color: gray;
+    color: var(--border-color);
+    cursor: not-allowed;
+}
+
+/* Styling the popup window for the alret messages */
 .popup {
     display: none;
     position: fixed;
@@ -294,54 +328,48 @@ img {
     align-items: center;
 }
 
+/* Styling the popup window for the alret messages */
 .popup-content {
-    background-color: white;
+    background-color: var(--border-white);
     padding: 20px;
     border-radius: 5px;
     text-align: center;
 }
 
+/* Styling the popup window button for the alret messages */
 #popup-okay {
     margin-top: 10px;
 }
 
+/* Styling the popup window button for the alret messages */
 .popup-button {
     margin-top: 10px;
     padding: 5px 10px;
-    background-color: #007bff;
-    color: white;
+    background-color: var(--button-blue);
+    color: var(--border-white);
     border: none;
     border-radius: 3px;
     cursor: pointer;
 }
 
+/* Adding flex to the form container */
 .form-item {
     display: flex;
     flex-direction: column;
 }
 
+/* Styling the form */
 form {
     display: grid;
     padding: 1em;
-    background: #f9f9f9;
+    background: var(--border-white);
     padding: 1em;
     border-radius: 15px;
 }
 
-.error {
-    color: red;
-    /* Set the text color to red */
-    font-size: 14px;
-    /* Set the font size */
-    margin-top: 5px;
-    /* Add some margin space at the top */
-}
-
-/* Unicode code point is U+26A0.  */
-.error::before {
-    content: "⚠ ";
-    /* Display a warning icon before the error message */
-    font-weight: bold;
+/* Ensuring the textarea is not adjustable by the end user */
+textarea {
+    resize: none;
 }
 
 /* Style the footer on every page */
@@ -351,14 +379,14 @@ footer {
     justify-content: space-evenly;
     align-items: center;
     background: #000;
-    color: white;
+    color: var(--border-white);
     width: 100%;
     padding-bottom: 1rem;
 }
 
 /* style the anchor tag within a list item on the footer of every page */
 footer li a {
-    color: white;
+    color: var(--border-white);
     text-decoration: none;
 }
 
@@ -369,7 +397,8 @@ footer li a:visited {
 
 /* styles the hover action on an anchor tag of a list item on the footer of every page */
 footer li a:hover {
-    color: white;
+    color: var(--border-white);
+    ;
     padding-bottom: 0.1rem;
     border-bottom-style: solid;
     border-bottom-width: 0.1rem;
@@ -380,7 +409,7 @@ footer li a:hover {
 li {
     list-style-type: none;
     line-height: 2;
-    color: white;
+    color: var(--border-white);
     cursor: pointer;
     padding-right: 2rem;
 }
@@ -396,7 +425,7 @@ footer p {
     padding: 2em 0 !important;
 }
 
-/* Media queries for smaller screen */
+/* Media queries for tablet screen */
 @media only screen and (max-width: 1280px),
 screen and (max-height:800px) {
 
@@ -424,6 +453,7 @@ screen and (max-height:800px) {
     }
 }
 
+/* Media query for small tablet or larger phone screen */
 @media only screen and (max-width: 1024px),
 screen and (max-height:768px) {
 
@@ -447,7 +477,7 @@ screen and (max-height:768px) {
         height: 2em;
         margin-bottom: .2rem;
         margin-top: .2rem;
-        border: solid 1px #ffffff;
+        border: solid 1px var(--border-white);
         display: flex;
         justify-content: center;
         align-items: center;
@@ -488,6 +518,7 @@ screen and (max-height:768px) {
     }
 }
 
+/* Media query for phone */
 @media only screen and (max-width: 800px),
 screen and (max-height:480px) {
     .reel {
@@ -509,6 +540,7 @@ screen and (max-height:480px) {
     }
 }
 
+/* Media query for phone */
 @media only screen and (max-width: 400px) {
     .row {
         flex-direction: column;
@@ -516,6 +548,7 @@ screen and (max-height:480px) {
 
 }
 
+/* Media query for hamburger menu */
 @media screen and (min-width: 800px) {
     .nav-toggle-label {
         display: none;
