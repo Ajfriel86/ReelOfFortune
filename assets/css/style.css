@@ -150,7 +150,7 @@ nav a:hover {
 /* Styling the main container of the game */
 .main-container {
     min-height: 100vh;
-    background-image: url(./assets/images/casino.jpg);
+    background-image: url(assets/images/casino.jpg);
     background-blend-mode: multiply;
     background-size: cover;
     display: grid;
