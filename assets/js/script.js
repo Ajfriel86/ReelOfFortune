@@ -96,6 +96,32 @@ class SlotMachine {
         // This calls the method updateMovesDispaly, which will update the on screen display of moves taken by a user
         this.updateMovesDisplay();
 
+        const homeButton = document.getElementById('home-button');
+        const contactButton = document.getElementById('contact-button');
+        // Add event listeners to the home and contact buttons
+        homeButton.addEventListener('click', (event) => {
+            event.preventDefault(); // Prevent the default navigation behavior
+            const confirmation = confirm("Do you wish to navigate away from this page?")
+
+            if (confirmation) {
+                // If the user confirms, navigate to the home page
+                window.location.href = "https://ajfriel86.github.io/ReelOfFortune/index.html"; // Replace with your actual home page URL
+            } else {
+                // do nothing
+            }
+        });
+
+        contactButton.addEventListener('click', (event) => {
+            const confirmation = confirm("Do you wish to navigate away from this page?")
+
+            if (confirmation) {
+                // If the user confirms, navigate to the home page
+                window.location.href = "https://ajfriel86.github.io/ReelOfFortune/contact.html"; // Replace with your actual home page URL
+            } else {
+                // do nothing
+            }
+        });
+
     }
     // Method for Custom popup messages instead of alrets
     showPopup(message) {
@@ -233,7 +259,8 @@ class SlotMachine {
         // Get image paths from the reels
         const imagePaths = this.reels.map(reel => reel.imageElement.src);
         // If statement to check if all thee images match and if they do, the user gets 100 points, the points displayed is updated, a pop tells the user they matched the images 
-        if (imagePaths[0] === imagePaths[1] && imagePaths[1] === imagePaths[2]) {
+        // It also states that if image[0] contains the default image that it is not a match
+        if (imagePaths[0] === imagePaths[1] && imagePaths[1] === imagePaths[2] && !imagePaths[0].includes('x.png')) {
             // Award points for a three-of-a-kind win
             this.points += 100;
             // This updates the points displayed on the screem
