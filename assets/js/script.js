@@ -80,12 +80,16 @@ class SlotMachine {
         // This refers to the HTML element spin-button, the event is listening for the click on this button and will bind that click to the JS proerpty spinButton
         this.spinButton.addEventListener('click', this.spin.bind(this));
         // This refers to the HTML element reset-button, the event is listening for the click on this button and will bind that click to the JS proerpty resetButton
+        this.resetButton.addEventListener('click', this.resetGameNoMsg.bind(this));
+        // This refers to the HTML element reset-button, the event is listening for the click on this button and will bind that click to the JS proerpty resetButton
         this.resetButton.addEventListener('click', this.resetGame.bind(this));
         // This refers to the HTML element level-select, the event is listening for the click on this button and will bind that click to the JS proerpty levelSelect
         this.levelSelect.addEventListener('change', this.updateLevel.bind(this));
 
         this.spinButton.addEventListener('click', this.enableResetButton.bind(this));
-
+        this.resetButton.addEventListener('click', (event) => {
+            this.resetGame(event); // Pass the event object to the resetGame method
+        });
         // Set default level and initialize reels
         // This is in reference to the selected level by the user, this will set the value picked by the user and then apply that to the game
         this.levelSelect.value = this.level;
@@ -121,17 +125,53 @@ class SlotMachine {
         });
 
     }
-    // Method for Custom popup messages instead of alerts
-    showPopup(message) {
-        // This retrieves the HTML element custom-popup and assigns it to the local variable popup 
+    showPopup(message, showYesNoButtons) {
         const popup = document.getElementById('custom-popup');
-        // This retrieves the HTML element popup-message and assigns it to the local variable popupMessage
         const popupMessage = document.getElementById('popup-message');
-        // This updates the popupMessage variable, and updates the text within it using the 'message' parameter
+        const popupContent = document.getElementById('popup-content');
+        const popupYesButton = document.getElementById('popup-yes');
+        const popupNoButton = document.getElementById('popup-no');
+        const popupOKButton = document.getElementById('popup-okay');
+
         popupMessage.innerText = message;
-        // This assigns the CSS property of 'flex' to the popup window
+
+        if (showYesNoButtons) {
+            popupYesButton.style.display = 'block';
+            popupNoButton.style.display = 'block';
+            popupOKButton.style.display = 'none';
+        } else {
+            popupYesButton.style.display = 'none';
+            popupNoButton.style.display = 'none';
+            popupOKButton.style.display = 'block';
+        }
+
         popup.style.display = 'flex';
+
+        popupYesButton.addEventListener('click', () => {
+            this.hidePopup();
+            this.resetGameNoMsg();
+            // Enable the reset button again
+            this.resetButton.disabled = false;
+            this.resetButton.classList.remove('disabled-button');
+        });
+
+        popupNoButton.addEventListener('click', () => {
+            this.hidePopup();
+            // Enable the reset button again
+            this.resetButton.disabled = false;
+            this.resetButton.classList.remove('disabled-button');
+        });
+
+        popupOKButton.addEventListener('click', () => {
+            this.hidePopup();
+            this.resetGameNoMsg();
+            // Enable the reset button again
+            this.resetButton.disabled = false;
+            this.resetButton.classList.remove('disabled-button');
+        });
     }
+
+
     // Method to hide the pop up
     hidePopup() {
         // This refers to the HTML element custom-popup, which is the button on the popup, and assigns it to the local variable popup
@@ -282,7 +322,8 @@ class SlotMachine {
         this.resetButton.classList.remove('disabled-button');
     }
     // Method to handle a reset with no confirmation
-    resetGameNoMsg() {
+    resetGameNoMsg(event) {
+        event.preventDefault();
         // Reset the games points & moves if the user confirms
         // This sets the points back to zero
         this.points = 0;
@@ -299,47 +340,17 @@ class SlotMachine {
         });
     }
 
-    // Method to handle the reset button click with confirmation
-    resetGame() {
-        // Add event listener for the reset button
-        this.resetButton.addEventListener('click', event => {
-            // Prevent the default behavior of the reset button
-            event.preventDefault();
+    resetGame(event) {
+        event.preventDefault(); // Prevent the default reset behavior
+        // Show a confirmation popup before resetting the game
+        this.showPopup("Are you sure you want to reset the game?", true); // Passing true to show yes/no buttons
 
-            // Show a confirmation popup before resetting the game
-            this.showPopup("Are you sure you want to reset the game?");
-
-            // Add event listeners for Yes and No buttons in the popup
-            const popupYesButton = document.getElementById('popup-yes');
-            const popupNoButton = document.getElementById('popup-no');
-
-            popupYesButton.addEventListener('click', () => {
-                // Hide the popup
-                this.hidePopup();
-                // Reset the game
-                this.performReset();
-            });
-
-            popupNoButton.addEventListener('click', () => {
-                // Hide the popup
-                this.hidePopup();
-            });
-        });
-    }
-
-    // Method to perform the actual reset
-    performReset() {
-        // Reset the games points & moves if the user confirms
-        this.points = 0;
-        this.moves = 0;
-        this.updateMovesDisplay();
-        this.updatePointsDisplay();
+        // Disable the reset button after it's clicked
         this.resetButton.disabled = true;
         this.resetButton.classList.add('disabled-button');
-        this.reels.forEach(reel => {
-            reel.imageElement.src = 'assets/images/' + reel.defaultImage;
-        });
     }
+
+
     // Method to update the selected game level
     updateLevel() {
         // Get the selected level from the dropdown
