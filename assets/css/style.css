@@ -367,9 +367,14 @@ form {
     border-radius: 15px;
 }
 
+form .btn {
+    margin-top: 0.5rem;
+}
+
 /* Ensuring the textarea is not adjustable by the end user */
 textarea {
     resize: none;
+    margin-top: 0.5rem;
 }
 
 /* Style the footer on every page */
