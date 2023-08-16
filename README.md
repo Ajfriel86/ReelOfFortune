@@ -121,21 +121,24 @@
 
 #### Landing page:
 
-![wireframe landing page](./Readmeimages/wire_frame_landing_page.png)
+![wireframe landing page](./read_me_images/wf_index_page.png)
+![wireframe mobile landing page](./read_me_images/wf_mobile_home_page.png)
 
 #### Game page:
 
-![wireframe classes page](./Readmeimages/wireframe_classes_page.png)
+![wireframe game page](./read_me_images/wf_game_page.png)
+![wireframe mobile game page](./read_me_images/wf_mobile_game_page.png)
 
 
 #### Contact page:
 
-![wireframe contact page](./Readmeimages/wireframe_contact_page.png)
+![wireframe game page](./read_me_images/wf_contact_page.png)
+![wireframe mobile contact page](./read_me_images/wf_mobile_contact_page.png)
 
 ### Implementation of Design
 
     
-![color swatch](./Readmeimages/colour_swatch.png)
+![color swatch](./read_me_imagess/colour_swatch.png)
 
 
 
