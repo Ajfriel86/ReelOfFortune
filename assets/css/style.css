@@ -58,8 +58,8 @@ h1 {
 .nav-toggle-label {
     position: absolute;
     top: 0;
-    left: 0;
-    margin-left: 1em;
+    right: 0;
+    margin-right: 1em;
     height: 100%;
     display: flex;
     align-items: center;
@@ -214,6 +214,7 @@ nav a:hover {
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
+    align-items: center;
     margin-bottom: 1rem;
     margin-left: 1rem;
     margin-right: 1rem;
@@ -412,6 +413,8 @@ li {
     color: var(--border-white);
     cursor: pointer;
     padding-right: 2rem;
+    display: flex;
+    flex-wrap: wrap;
 }
 
 /* Style the unordered list in the footer */
@@ -428,13 +431,16 @@ footer p {
 /* Media queries for tablet screen */
 @media only screen and (max-width: 1280px),
 screen and (max-height:800px) {
+    .rules {
+        font-size: .5rem;
+    }
 
     .reel {
         width: 12rem;
         height: 12rem;
     }
 
-    .row {
+    .add-row {
         margin-top: 5rem;
     }
 
@@ -457,11 +463,15 @@ screen and (max-height:800px) {
 @media only screen and (max-width: 1024px),
 screen and (max-height:768px) {
 
+    .rules {
+        font-size: .5rem;
+    }
+
     h1 {
         font-size: 17px;
     }
 
-    .row {
+    .add-row {
         margin-top: 4rem;
         flex-wrap: wrap;
 
@@ -521,6 +531,11 @@ screen and (max-height:768px) {
 /* Media query for phone */
 @media only screen and (max-width: 800px),
 screen and (max-height:480px) {
+
+    .rules {
+        font-size: .5rem;
+    }
+
     .reel {
         width: 120px;
         height: 120px;
@@ -542,7 +557,12 @@ screen and (max-height:480px) {
 
 /* Media query for phone */
 @media only screen and (max-width: 400px) {
-    .row {
+
+    .rules {
+        font-size: .5rem;
+    }
+
+    .add-row {
         flex-direction: column;
     }
 
