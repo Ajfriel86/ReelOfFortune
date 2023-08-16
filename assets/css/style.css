@@ -222,7 +222,7 @@ nav a:hover {
 
 /* Styling the rules container on the home page */
 .rules {
-    background-color: rgbavar(--background-color);
+    background-color: var(--background-color);
     box-shadow: var(--box-shadow);
     border: solid 3px var(--border-white);
     border-radius: 15px;
