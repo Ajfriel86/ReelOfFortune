@@ -38,6 +38,12 @@ class Reel {
         // Set the image source
         this.imageElement.src = imagePath;
     }
+
+    // Method to stop the spinning of the reel
+    stopSpin() {
+        // Remove the 'load' event listener from the image element
+        this.imageElement.removeEventListener('load', this.callback);
+    }
 }
 
 // Define the SlotMachine class for managing the game
@@ -79,11 +85,7 @@ class SlotMachine {
         // Set up event listeners for the UI elements
         // This refers to the HTML element spin-button, the event is listening for the click on this button and will bind that click to the JS proerpty spinButton
         this.spinButton.addEventListener('click', this.spin.bind(this));
-        // This refers to the HTML element reset-button, the event is listening for the click on this button and will bind that click to the JS proerpty resetButton
-        this.resetButton.addEventListener('click', this.resetGameNoMsg.bind(this));
-        // This refers to the HTML element reset-button, the event is listening for the click on this button and will bind that click to the JS proerpty resetButton
-        this.resetButton.addEventListener('click', this.resetGame.bind(this));
-        // This refers to the HTML element level-select, the event is listening for the click on this button and will bind that click to the JS proerpty levelSelect
+
         this.levelSelect.addEventListener('change', this.updateLevel.bind(this));
 
         this.spinButton.addEventListener('click', this.enableResetButton.bind(this));
@@ -251,7 +253,15 @@ class SlotMachine {
             // Ends the game
             this.endGame();
         }
+        this.stopSpin();
     }
+
+    // Method to stop the spinning of reels
+    stopSpin() {
+        // Loop through each reel and call the stopSpin method on them
+        this.reels.forEach(reel => reel.stopSpin());
+    }
+
     // Method to end the game
     endGame() {
         // If statement: if the points a user has is less than or equal to the points needed to win an alert is displayed
@@ -273,13 +283,8 @@ class SlotMachine {
         // THis increases the spin count
         this.completedSpins++;
         // If statement to check for a win condition after every move
-        if (this.moves > 0) {
+        if (this.moves > 0 && this.completedSpins === this.reels.length) {
             console.log("Checking win condition1");
-            // Check for a win condition after all reels have stopped spinning
-            this.checkWinCondition();
-        }
-        // Check to see if all reels have finished spinning
-        if (this.completedSpins === this.reels.length) {
             // Reset completed spins count
             this.completedSpins = 0;
             // Check for a win condition after all reels have stopped spinning
@@ -322,8 +327,7 @@ class SlotMachine {
         this.resetButton.classList.remove('disabled-button');
     }
     // Method to handle a reset with no confirmation
-    resetGameNoMsg(event) {
-        event.preventDefault();
+    resetGameNoMsg() {
         // Reset the games points & moves if the user confirms
         // This sets the points back to zero
         this.points = 0;
@@ -350,20 +354,34 @@ class SlotMachine {
         this.resetButton.classList.add('disabled-button');
     }
 
-
     // Method to update the selected game level
     updateLevel() {
         // Get the selected level from the dropdown
         const newLevel = this.levelSelect.value;
-        // Update the current level
-        this.level = newLevel;
-        // Update maximum allowed moves
-        this.maxMoves = this.getMaxMoves();
-        // Update points required to win 
-        this.pointsToWin = this.getPointsToWin();
+
+        // Check if the level is changed
+        if (newLevel !== this.level) {
+            // Show a confirmation popup before changing the level
+            this.showPopup("Changing the level will reset the game. Are you sure you want to continue?", true);
+
+            // Add an event listener to the reset button for the level change
+            const resetListener = (event) => {
+                // Prevent the default reset behavior
+                event.preventDefault();
+
+                // Reset the game and update the level
+                this.level = newLevel;
+                this.resetGameNoMsg();
+                this.updateMovesDisplay();
+                this.updatePointsDisplay();
+
+                // Remove the event listener after execution
+                this.resetButton.removeEventListener('click', resetListener);
+            };
+
+            this.resetButton.addEventListener('click', resetListener);
+        }
     }
-
-
 }
 
 // Create an instance of the SlotMachine class with the default level 'medium'
