@@ -307,15 +307,16 @@ class SlotMachine {
             //  a pop tells the user they matched the images 
             this.showPopup('Congratulations! You have a three-of-a-kind win! Points: ' + this.points);
             // If statement to see if the points gained are greater than or equalt to the points to win AND if the moves made are less than or equal to the max moves to win
-            if (this.points >= this.pointsToWin) {
+            if (this.points >= this.pointsToWin && this.moves >= this.maxMoves) {
                 // if points and moves are met a popup tells the user they won
                 this.showPopup(`You win! You reached ${this.pointsToWin} points within ${this.maxMoves} moves.`);
+                this.endGame
             }
             // else/if the moves taken are equal to the max moves then the user looses
-            else if (this.moves === this.maxMoves) {
+            else if (this.moves === this.maxMoves && this.points < this.pointsToWin) {
                 this.showPopup(`You lose! You did not reach ${this.pointsToWin} points within ${this.maxMoves} moves.`);
                 // Reset the game
-                this.resetGameNoMsg();
+                this.endGame();
             }
         }
     }
@@ -346,8 +347,26 @@ class SlotMachine {
 
     resetGame(event) {
         event.preventDefault(); // Prevent the default reset behavior
+
+        // Disable the spin button
+        this.spinButton.disabled = true;
+        this.spinButton.classList.add('disabled-button');
+
         // Show a confirmation popup before resetting the game
         this.showPopup("Are you sure you want to reset the game?", true); // Passing true to show yes/no buttons
+
+        const popupOKButton = document.getElementById('popup-yes');
+
+        popupOKButton.addEventListener('click', () => {
+            // Enable the spin button
+            this.spinButton.disabled = false;
+            this.spinButton.classList.remove('disabled-button');
+            // Reset the game and update the level
+            this.level = newLevel;
+            this.resetGameNoMsg();
+            this.updateMovesDisplay();
+            this.updatePointsDisplay();
+        });
 
         // Disable the reset button after it's clicked
         this.resetButton.disabled = true;
@@ -370,8 +389,14 @@ class SlotMachine {
                 event.preventDefault();
 
                 // Reset the game and update the level
-                this.level = newLevel;
-                this.resetGameNoMsg();
+
+                this.maxMoves = this.getMaxMoves(); // Update max moves
+                this.pointsToWin = this.getPointsToWin(); // Update points to win
+                // This sets the points back to zero
+                this.points = 0;
+                // This sets the moves back to zero
+                this.moves = 0;
+                this.setupReels();
                 this.updateMovesDisplay();
                 this.updatePointsDisplay();
 
