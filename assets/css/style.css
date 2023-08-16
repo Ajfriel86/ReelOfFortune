@@ -233,14 +233,15 @@ nav a:hover {
     flex-direction: column;
     align-items: center;
     padding: 2rem;
-    font-size: 2rem;
     width: 90%;
-    font-size: calc(60% + 0.8vmin) !important;
+    font-size: calc(90% + 0.8vmin) !important;
 }
 
 /* Styling the list items, in the ordered list, of the rules container, on the home page */
 .rules ol li {
     list-style-type: decimal;
+    color: var(--border-white);
+    line-height: 2;
 }
 
 /* Styling the contact form */
@@ -405,7 +406,7 @@ footer li a:hover {
 }
 
 /* Style the list items */
-li {
+footer li {
     list-style-type: none;
     line-height: 2;
     color: var(--border-white);
