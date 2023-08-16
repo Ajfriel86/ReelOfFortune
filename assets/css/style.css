@@ -230,14 +230,12 @@ nav a:hover {
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
-    margin-bottom: 1rem;
-    margin-left: 1rem;
-    margin-right: 1rem;
-    margin-top: 5rem;
     flex-direction: column;
     align-items: center;
     padding: 2rem;
     font-size: 2rem;
+    width: 90%;
+    font-size: calc(60% + 0.8vmin) !important;
 }
 
 /* Styling the list items, in the ordered list, of the rules container, on the home page */
@@ -431,9 +429,6 @@ footer p {
 /* Media queries for tablet screen */
 @media only screen and (max-width: 1280px),
 screen and (max-height:800px) {
-    .rules {
-        font-size: .5rem;
-    }
 
     .reel {
         width: 12rem;
@@ -462,10 +457,6 @@ screen and (max-height:800px) {
 /* Media query for small tablet or larger phone screen */
 @media only screen and (max-width: 1024px),
 screen and (max-height:768px) {
-
-    .rules {
-        font-size: .5rem;
-    }
 
     h1 {
         font-size: 17px;
@@ -532,10 +523,6 @@ screen and (max-height:768px) {
 @media only screen and (max-width: 800px),
 screen and (max-height:480px) {
 
-    .rules {
-        font-size: .5rem;
-    }
-
     .reel {
         width: 120px;
         height: 120px;
@@ -557,10 +544,6 @@ screen and (max-height:480px) {
 
 /* Media query for phone */
 @media only screen and (max-width: 400px) {
-
-    .rules {
-        font-size: .5rem;
-    }
 
     .add-row {
         flex-direction: column;
