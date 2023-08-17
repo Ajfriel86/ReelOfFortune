@@ -81,98 +81,132 @@ class SlotMachine {
         this.resetButton.classList.add('disabled-button');
         // This retrieves the HTML element level-select and assigns it the proerpty levelSelect
         this.levelSelect = document.getElementById('level-select');
-
-        // Set up event listeners for the UI elements
+        // This is an event listener for the level-select drop down menuand it listens for the user changing the level and then it binds it to the updateLevel() method and ensure it is called 
+        this.levelSelect.addEventListener('change', this.updateLevel.bind(this));
         // This refers to the HTML element spin-button, the event is listening for the click on this button and will bind that click to the JS proerpty spinButton
         this.spinButton.addEventListener('click', this.spin.bind(this));
 
-        this.levelSelect.addEventListener('change', this.updateLevel.bind(this));
-
+        // This adds an event listener to the click of the spin-button in the html doc, and then binds it to the reset button to enable it, as it is grayed out other wise
         this.spinButton.addEventListener('click', this.enableResetButton.bind(this));
+        // This adds an event listener to the click of the reset-button in the html doc, it then uses an event object and an arrow function to define its behavior, in this case event.preventDefault(); 
         this.resetButton.addEventListener('click', (event) => {
-            this.resetGame(event); // Pass the event object to the resetGame method
+            // When the reset button is clicked  the game will reset but the event will technically pause the game with the event.preventDefault(); until the user selects yes/no from the popup
+            this.resetGame(event);
         });
-        // Set default level and initialize reels
         // This is in reference to the selected level by the user, this will set the value picked by the user and then apply that to the game
         this.levelSelect.value = this.level;
         // This calls the method updatePointsDisplay, which will update the on screen value of the points earned by the user
         this.updatePointsDisplay();
         // This calls the method updateMovesDispaly, which will update the on screen display of moves taken by a user
         this.updateMovesDisplay();
-
+        // This adds a variable that is then assigned to the html document id called home-button, whcih is on the nav bar 
         const homeButton = document.getElementById('home-button');
+        // This adds a variable that is then assigned to the html document id called contact-button, whcih is on the nav bar  
         const contactButton = document.getElementById('contact-button');
-        // Add event listeners to the home and contact buttons
+        // Adding event listeners to the home button on the html doc
         homeButton.addEventListener('click', (event) => {
-            event.preventDefault(); // Prevent the default navigation behavior
+            // Prevents the default navigation behavior so the user can engauge with the popup before being navigated away from the page
+            event.preventDefault();
+            // Adding a variable to the confirmation popup
             const confirmation = confirm("Do you wish to navigate away from this page?")
-
+            // Taking that variable and telling the compiler that if it is confirmed (yes) navigate to the following screen
             if (confirmation) {
                 // If the user confirms, navigate to the home page
                 window.location.href = "https://ajfriel86.github.io/ReelOfFortune/index.html"; // Replace with your actual home page URL
-            } else {
+            }
+            // If not confirmed, then there is an empty else statement suggesting to "Do nothing"
+            else {
                 // do nothing
             }
         });
-
+        // Adding event listeners to the contact button on the html doc
         contactButton.addEventListener('click', (event) => {
+            // Prevents the default navigation behavior so the user can engauge with the popup before being navigated away from the page
+            event.preventDefault();
+            // Adding a variable to the confirmation popup
             const confirmation = confirm("Do you wish to navigate away from this page?")
-
+            // Taking that variable and telling the compiler that if it is confirmed (yes) navigate to the following screen
             if (confirmation) {
                 // If the user confirms, navigate to the home page
                 window.location.href = "https://ajfriel86.github.io/ReelOfFortune/contact.html"; // Replace with your actual home page URL
-            } else {
+            }
+            // If not confirmed, then there is an empty else statement suggesting to "Do nothing"
+            else {
                 // do nothing
             }
         });
 
     }
+
+    // This is a method to show a custom popup message with function parameters that will be passed through it
     showPopup(message, showYesNoButtons) {
+        // A variable assigned to the html id custom-popup
         const popup = document.getElementById('custom-popup');
+        // A variable assigned to the html id popup-message
         const popupMessage = document.getElementById('popup-message');
+        // A variable assigned to the html id popup-content
         const popupContent = document.getElementById('popup-content');
+        // A variable assigned to the html id popup-yes
         const popupYesButton = document.getElementById('popup-yes');
+        // A variable assigned to the html id popup-no
         const popupNoButton = document.getElementById('popup-no');
+        // A variable assigned to the html id popup-okay
         const popupOKButton = document.getElementById('popup-okay');
 
+        // This sets the provided message into the popup
         popupMessage.innerText = message;
 
+        // Using an if statement to display the differrent buttons on the popup
         if (showYesNoButtons) {
-            popupYesButton.style.display = 'block';
-            popupNoButton.style.display = 'block';
+            // Show the Yes/No buttons but not the OK button
+            popupYesButton.style.display = 'flex';
+            popupNoButton.style.display = 'flex';
             popupOKButton.style.display = 'none';
-        } else {
+        }
+        // Show the ok button but not the yes/no
+        else {
             popupYesButton.style.display = 'none';
             popupNoButton.style.display = 'none';
-            popupOKButton.style.display = 'block';
+            popupOKButton.style.display = 'flex';
         }
 
+        // Setting the dispaly to flex on the popup for responsiveness 
         popup.style.display = 'flex';
 
+        // Adding an event listener to the yes button to wait for a click
         popupYesButton.addEventListener('click', () => {
+            // When clicked, hide the popup
             this.hidePopup();
+            // Reset the game
             this.resetGameNoMsg();
             // Enable the reset button again
             this.resetButton.disabled = false;
+            // Removed the grayed out look
             this.resetButton.classList.remove('disabled-button');
         });
 
+        // Adding an event listener to the no button to wait for a click
         popupNoButton.addEventListener('click', () => {
+            // When clicked, hide the popup
             this.hidePopup();
             // Enable the reset button again
             this.resetButton.disabled = false;
+            // Removed the grayed out look
             this.resetButton.classList.remove('disabled-button');
         });
 
+        // Adding an event listener to the no button to wait for a click
         popupOKButton.addEventListener('click', () => {
+            // When clicked, hide the popup
             this.hidePopup();
+            // Reset the game
             this.resetGameNoMsg();
             // Enable the reset button again
             this.resetButton.disabled = false;
+            // REmoved grayed out look
             this.resetButton.classList.remove('disabled-button');
         });
     }
-
 
     // Method to hide the pop up
     hidePopup() {
@@ -181,6 +215,7 @@ class SlotMachine {
         // This assigns the CSS property of 'none' to the popup window, in order to hide it
         popup.style.display = 'none';
     }
+
     // Method to set up the reels
     setupReels() {
         // for loop for setting up 3 instances for the 3 reels
@@ -320,6 +355,7 @@ class SlotMachine {
             }
         }
     }
+
     // Method to enable the reset button when the spin button is clicked
     enableResetButton() {
         // Enable the reset button
@@ -327,6 +363,7 @@ class SlotMachine {
         // Remove the 'disabled-button' class
         this.resetButton.classList.remove('disabled-button');
     }
+
     // Method to handle a reset with no confirmation
     resetGameNoMsg() {
         // Reset the games points & moves if the user confirms
@@ -345,31 +382,36 @@ class SlotMachine {
         });
     }
 
+    // Game reset with popup confirmation
     resetGame(event) {
-        event.preventDefault(); // Prevent the default reset behavior
-
+        // Prevent the default reset behavior
+        event.preventDefault();
         // Disable the spin button
         this.spinButton.disabled = true;
+        // Adds the class to it which grays out the button 
         this.spinButton.classList.add('disabled-button');
-
         // Show a confirmation popup before resetting the game
         this.showPopup("Are you sure you want to reset the game?", true); // Passing true to show yes/no buttons
-
-        const popupOKButton = document.getElementById('popup-yes');
-
-        popupOKButton.addEventListener('click', () => {
-            // Enable the spin button
+        // assigning a variable to the html id popup yes button
+        const popupYesButton = document.getElementById('popup-yes');
+        // Adding an event listener to the click of the button
+        popupYesButton.addEventListener('click', () => {
+            // when clicked, enable the spin button
             this.spinButton.disabled = false;
+            // Removed grayed out look
             this.spinButton.classList.remove('disabled-button');
-            // Reset the game and update the level
+            // Epdated the level
             this.level = newLevel;
+            // Resests the game
             this.resetGameNoMsg();
+            // Updates the moves
             this.updateMovesDisplay();
+            // Updates the points
             this.updatePointsDisplay();
         });
-
         // Disable the reset button after it's clicked
         this.resetButton.disabled = true;
+        // Addes the grayed out look
         this.resetButton.classList.add('disabled-button');
     }
 
@@ -382,29 +424,57 @@ class SlotMachine {
         if (newLevel !== this.level) {
             // Show a confirmation popup before changing the level
             this.showPopup("Changing the level will reset the game. Are you sure you want to continue?", true);
+            // Add an event listener to the popup's Yes button for the level change
+            const popupYesButton = document.getElementById('popup-yes');
+            // Adding an event listener to the click of the yes button
+            popupYesButton.addEventListener('click', () => {
+                // Close the popup
+                this.hidePopup();
 
-            // Add an event listener to the reset button for the level change
-            const resetListener = (event) => {
-                // Prevent the default reset behavior
-                event.preventDefault();
-
-                // Reset the game and update the level
-
-                this.maxMoves = this.getMaxMoves(); // Update max moves
-                this.pointsToWin = this.getPointsToWin(); // Update points to win
-                // This sets the points back to zero
+                //updates the level
+                this.level = newLevel;
+                // Update max moves
+                this.maxMoves = this.getMaxMoves();
+                // Update points to win
+                this.pointsToWin = this.getPointsToWin();
+                // Reset points and moves
                 this.points = 0;
-                // This sets the moves back to zero
                 this.moves = 0;
+                // Setting up the reels
                 this.setupReels();
+                // Updates the moves displayed on the screen
                 this.updateMovesDisplay();
+                // Updates the points displayed on the screen
                 this.updatePointsDisplay();
+                // Enable the spin button
+                this.spinButton.disabled = false;
+                // Removes the grayed out look
+                this.spinButton.classList.remove('disabled-button');
+                // Disable the reset button after the level change
+                this.resetButton.disabled = true;
+                // Adds the grayed out look
+                this.resetButton.classList.add('disabled-button');
+                // Remove the event listener from the Yes button after execution
+                popupYesButton.removeEventListener('click', resetListener);
+            });
 
-                // Remove the event listener after execution
-                this.resetButton.removeEventListener('click', resetListener);
-            };
-
-            this.resetButton.addEventListener('click', resetListener);
+            // Assign a variable to the popups no button
+            const popupNoButton = document.getElementById('popup-no');
+            // Adding an event listener to the click
+            popupNoButton.addEventListener('click', () => {
+                // When click close the popup
+                this.hidePopup();
+                // Disable the reset button after the level change
+                this.resetButton.disabled = true;
+                // Adds grayed out look
+                this.resetButton.classList.add('disabled-button');
+                // Enable the spin button after the user decides not to change the level
+                this.spinButton.disabled = false;
+                // Removes grayed out look
+                this.spinButton.classList.remove('disabled-button');
+                // Remove the event listener from the No button after execution
+                popupNoButton.removeEventListener('click', resetListener);
+            });
         }
     }
 }
