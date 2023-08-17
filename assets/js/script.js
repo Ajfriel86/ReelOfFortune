@@ -15,17 +15,16 @@ class Reel {
         this.imageElement = document.getElementById(`img${id}`);
         // Callback function to execute after spinning complete
         this.callback = callback;
-        s
     }
 
     // Method to spin the reel
     spin() {
         // this is setting the src attribute to the img tags in the html doc
-        this.imageElement.src = 'assets/images/' + this.defaultImage;
+        this.imageElement.src = '/assets/images/' + this.defaultImage;
         // creating a variable for a random index, Math.floor rounds fdown to the nearest integer, and Math.random generates a random number and chooses this from the selection (or lenght/amount) of images
         const randomIndex = Math.floor(Math.random() * this.images.length);
         // Creates a variable to locate the images in their folder and assigns the images to the randomIndex above
-        const imagePath = 'assets/images/' + this.images[randomIndex];
+        const imagePath = '/assets/images/' + this.images[randomIndex];
         // Create a new load event listener and store it in a variable
         const loadListener = () => {
             // Removing the listener after it has been triggered ensures the callback is only called once per spin (as I was having errors with repeated call backs)
@@ -41,7 +40,7 @@ class Reel {
 
     stopSpin() { // Method to stop the spinning of the reel
         // Remove the 'load' event listener from the image element
-        this.imageElement.removeEventListener("load", this.callback);
+        this.imageElement.removeEventListener('load', this.callback);
     }
 }
 
@@ -471,7 +470,9 @@ class SlotMachine { // Define the SlotMachine class for managing the game
                 };
             });
         }
+
     }
 }
 // Create an instance of the SlotMachine class with the default level 'medium'
 const slotMachine = new SlotMachine("medium");
+slotMachine();
