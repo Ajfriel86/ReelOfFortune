@@ -588,7 +588,6 @@ screen and (max-height:480px) {
         background: none;
         top: initial;
         left: initial;
-        /* end Edge support stuff */
 
         grid-column: 3 / 4;
         display: flex;
