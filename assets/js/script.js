@@ -1,53 +1,39 @@
-/* jshint esversion: 6 */
+/* jshint esversion: 8 */
 
-// Define the Reel class for handling individual reels
-class Reel {
-    // Constructor for the identifier and callback
-    constructor(id, callback) {
-        // Identifier for the reel
-        this.id = id;
-        // This is hte default image that will be displayed at the start of a game or when the game is reset
-        this.defaultImage = "x.png";
-        // This is an Array of images to be used for the reels
-        this.images = ["orange.png", "lemon.png", "grape.png", "diamond.png", "cherry.png", "bell.png", "7.jpg"];
-        // Getting the 'reel*' id from the html doc
-        this.element = document.getElementById("reel${id}");
-        // Getting the 'img*' id from the html doc
-        this.imageElement = document.getElementById("img${id}");
-        // Callback function to execute after spinning completes
-        this.callback = callback;
+class Reel { // Define the Reel class for handling individual reels
+    constructor(id, callback) { // Constructor for the identifier and callback
+        this.id = id; // Identifier for the reel
+        this.defaultImage = 'x.png'; // This is hte default image that will be displayed at the start of a game or when the game is reset
+        this.images = ['orange.png', 'lemon.png', 'grape.png', 'diamond.png', 'cherry.png', 'bell.png', '7.jpg']; // This is an Array of images to be used for the reels
+        this.element = document.getElementById(`reel${id}`); // Getting the 'reel*' id from the html doc
+        this.imageElement = document.getElementById(`img${id}`); // Getting the 'img*' id from the html doc
+        this.callback = callback; // Callback function to execute after spinning completes
     }
-
-    // Method to spin the reel
-    spin() {
+    spin() { // Method to spin the reel
         // 
-        this.imageElement.src = "assets/images/" + this.defaultImage;
+        this.imageElement.src = 'assets/images/' + this.defaultImage;
         // creating a variable for a random index, Math.floor rounds fdown to the nearest integer, and Math.random generates a random number and chooses this from the selection (or lenght/amount) of images
         const randomIndex = Math.floor(Math.random() * this.images.length);
         // Creates a variable to locate the images in their folder and assigns the images to the randomIndex above
-        const imagePath = "assets/images/" + this.images[randomIndex];
+        const imagePath = 'assets/images/' + this.images[randomIndex];
         // Create a new load event listener and store it in a variable
         const loadListener = () => {
             // Removing the listener after it has been triggered ensures the callback is only called once per spin (as I was having errors with repeated call backs)
-            this.imageElement.removeEventListener("load", loadListener);
+            this.imageElement.removeEventListener('load', loadListener);
             // Call the callback once
             this.callback();
         };
         // Add a 'load' event listener to the image element to track when the image is loaded
-        this.imageElement.addEventListener("load", this.callback);
+        this.imageElement.addEventListener('load', this.callback);
         // Set the image source
         this.imageElement.src = imagePath;
     }
-
-    // Method to stop the spinning of the reel
-    stopSpin() {
+    stopSpin() { // Method to stop the spinning of the reel
         // Remove the 'load' event listener from the image element
         this.imageElement.removeEventListener("load", this.callback);
     }
 }
-
-// Define the SlotMachine class for managing the game
-class SlotMachine {
+class SlotMachine { // Define the SlotMachine class for managing the game
     // constructor for the level setting of the game, easy/med/hard
     constructor(level) {
         // Initializes properties such as arrays, the level of the game, moves, maxMoves, points to win, then connects JS elements to their HTML counter-parts
@@ -68,28 +54,28 @@ class SlotMachine {
         // This represents the max number of points needed for a user to win depending on the level of the game selcted
         this.pointsToWin = this.getPointsToWin();
         // This retrieves the HTML element moves-display and assigns it to the property movesDispaly 
-        this.movesDisplay = document.getElementById("moves-display");
+        this.movesDisplay = document.getElementById('moves-display');
         // // This retrieves the HTML element points-display and assigns it to the porperty pointsDisplay
-        this.pointsDisplay = document.getElementById("points-display");
+        this.pointsDisplay = document.getElementById('points-display');
         // // This retrieves the HTML element spin-button and assigns it to the property spinButton
-        this.spinButton = document.getElementById("spin-button");
+        this.spinButton = document.getElementById('spin-button');
         // This retrieves the HTML element rest-button and assigns it to the property restButton
-        this.resetButton = document.getElementById("reset-button");
+        this.resetButton = document.getElementById('reset-button');
         // Greying out hte reset button if its not in use
         this.resetButton.disabled = true;
         // Add the disabled-button class
-        this.resetButton.classList.add("disabled-button");
+        this.resetButton.classList.add('disabled-button');
         // This retrieves the HTML element level-select and assigns it the proerpty levelSelect
-        this.levelSelect = document.getElementById("level-select");
+        this.levelSelect = document.getElementById('level-select');
         // This is an event listener for the level-select drop down menuand it listens for the user changing the level and then it binds it to the updateLevel() method and ensure it is called 
-        this.levelSelect.addEventListener("change", this.updateLevel.bind(this));
+        this.levelSelect.addEventListener('change', this.updateLevel.bind(this));
         // This refers to the HTML element spin-button, the event is listening for the click on this button and will bind that click to the JS proerpty spinButton
-        this.spinButton.addEventListener("click", this.spin.bind(this));
+        this.spinButton.addEventListener('click', this.spin.bind(this));
 
         // This adds an event listener to the c"lick of the spin-button in the html doc, and then binds it to the reset button to enable it, as it is grayed out other wise
-        this.spinButton.addEventListener("click", this.enableResetButton.bind(this));
+        this.spinButton.addEventListener('click', this.enableResetButton.bind(this));
         // This adds an event listener to the click of the reset-button in the html doc, it then uses an event object and an arrow function to define its behavior, in this case event.preventDefault(); 
-        this.resetButton.addEventListener("click", (event) => {
+        this.resetButton.addEventListener('click', (event) => {
             // When the reset button is clicked  the game will reset but the event will technically pause the game with the event.preventDefault(); until the user selects yes/no from the popup
             this.resetGame(event);
         });
@@ -100,11 +86,11 @@ class SlotMachine {
         // This calls the method updateMovesDispaly, which will update the on screen display of moves taken by a user
         this.updateMovesDisplay();
         // This adds a variable that is then assigned to the html document id called home-button, whcih is on the nav bar 
-        const homeButton = document.getElementById("home-button");
+        const homeButton = document.getElementById('home-button');
         // This adds a variable that is then assigned to the html document id called contact-button, whcih is on the nav bar  
-        const contactButton = document.getElementById("contact-button");
+        const contactButton = document.getElementById('contact-button');
         // Adding event listeners to the home button on the html doc
-        homeButton.addEventListener("click", (event) => {
+        homeButton.addEventListener('click', (event) => {
             // Prevents the default navigation behavior so the user can engauge with the popup before being navigated away from the page
             event.preventDefault();
             // Adding a variable to the confirmation popup
@@ -120,7 +106,7 @@ class SlotMachine {
             }
         });
         // Adding event listeners to the contact button on the html doc
-        contactButton.addEventListener("click", (event) => {
+        contactButton.addEventListener('click', (event) => {
             // Prevents the default navigation behavior so the user can engauge with the popup before being navigated away from the page
             event.preventDefault();
             // Adding a variable to the confirmation popup
@@ -141,15 +127,15 @@ class SlotMachine {
     // This is a method to show a custom popup message with function parameters that will be passed through it
     showPopup(message, showYesNoButtons) {
         // A variable assigned to the html id custom-popup
-        const popup = document.getElementById("custom-popup");
+        const popup = document.getElementById('custom-popup');
         // A variable assigned to the html id popup-message
-        const popupMessage = document.getElementById("popup-message");
+        const popupMessage = document.getElementById('popup-message');
         // A variable assigned to the html id popup-yes
-        const popupYesButton = document.getElementById("popup-yes");
+        const popupYesButton = document.getElementById('popup-yes');
         // A variable assigned to the html id popup-no
-        const popupNoButton = document.getElementById("popup-no");
+        const popupNoButton = document.getElementById('popup-no');
         // A variable assigned to the html id popup-okay
-        const popupOKButton = document.getElementById("popup-okay");
+        const popupOKButton = document.getElementById('popup-okay');
 
         // This sets the provided message into the popup
         popupMessage.innerText = message;
@@ -317,7 +303,6 @@ class SlotMachine {
         this.completedSpins++;
         // If statement to check for a win condition after every move
         if (this.moves > 0 && this.completedSpins === this.reels.length) {
-            console.log("Checking win condition1");
             // Reset completed spins count
             this.completedSpins = 0;
             // Check for a win condition after all reels have stopped spinning
@@ -327,7 +312,6 @@ class SlotMachine {
 
     // Method to check for a win condition
     checkWinCondition() {
-        console.log("Checking win condition2");
         // Get image paths from the reels
         const imagePaths = this.reels.map(reel => reel.imageElement.src);
         // If statement to check if all thee images match and if they do, the user gets 100 points, the points displayed is updated, a pop tells the user they matched the images 
@@ -343,7 +327,7 @@ class SlotMachine {
             if (this.points >= this.pointsToWin && this.moves >= this.maxMoves) {
                 // if points and moves are met a popup tells the user they won
                 this.showPopup(`You win! You reached ${this.pointsToWin} points within ${this.maxMoves} moves.`);
-                this.endGame;
+                this.endGame();
             }
             // else/if the moves taken are equal to the max moves then the user looses
             else if (this.moves === this.maxMoves && this.points < this.pointsToWin) {
@@ -454,7 +438,9 @@ class SlotMachine {
                 // Adds the grayed out look
                 this.resetButton.classList.add("disabled-button");
                 // Remove the event listener from the Yes button after execution
-                popupYesButton.removeEventListener("click", resetListener);
+                const resetListener = () => {
+                    popupYesButton.removeEventListener("click", resetListener);
+                };
             });
 
             // Assign a variable to the popups no button
@@ -471,12 +457,13 @@ class SlotMachine {
                 this.spinButton.disabled = false;
                 // Removes grayed out look
                 this.spinButton.classList.remove("disabled-button");
-                // Remove the event listener from the No button after execution
-                popupNoButton.removeEventListener("click", resetListener);
+                const resetListener = () => {
+                    // Remove the event listener from the No button after execution
+                    popupNoButton.removeEventListener("click", resetListener);
+                };
             });
         }
     }
 }
-
 // Create an instance of the SlotMachine class with the default level 'medium'
 const slotMachine = new SlotMachine("medium");
