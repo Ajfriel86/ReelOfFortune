@@ -10,6 +10,8 @@ The landing page displays the rules for the game with a button that takes you to
 The second page, or game page, displays the game.
 The third page has a contact form.
 The last page, which is only displayed once the form is submitted, displays a thank you message once the form has been submitted.
+The site was made using HTML, CSS, and JavaScript. 
+I opted to create the JavaScript code using the programming paradigm, Object Orientated Programming, or O.O.P.
 
 ---
 
