@@ -221,6 +221,19 @@ nav a:hover {
     margin-top: 1rem;
 }
 
+.thanks {
+    background-color: var(--background-color);
+    box-shadow: var(--box-shadow);
+    border: solid 3px var(--border-white);
+    border-radius: 15px;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    align-items: center;
+    font-size: 50px;
+    padding: 1rem;
+}
+
 /* Styling the rules container on the home page */
 .rules {
     background-color: var(--background-color);
@@ -447,6 +460,10 @@ screen and (max-height:800px) {
 
     .level-select {
         font-size: 1.1rem;
+    }
+
+    .thanks {
+        font-size: 20px;
     }
 
     .counter {
