@@ -29,6 +29,7 @@
 </head>
 
 <body>
+    <!-- Holding the contents of the nav bar and heading -->
     <header class="header">
         <h1 class="logo">Reel of Fortune</h1>
         <!-- This checkbox is used to open/close the hamburger menu when it is activated but it also hidden with css -->
@@ -61,22 +62,26 @@
             <span></span>
         </label>
     </header>
-    <main>
-        <main class="main-container">
-            <div class="rules">
-                <p>Game Rules:</p>
-                <ol>
-                    <li>3-of-a-kind matches will earn you 100 points</li>
-                    <li>Easy Mode: 20 moves to reach 100 points</li>
-                    <li>Medium Mode: 15 moves to reach 200 points</li>
-                    <li>Hard Mode: 10 moves to reach 400 points</li>
-                    <li>If you notice any bugs/errors, please contact us via our contact form</li>
-                </ol>
-                <a href="game.html" aria-label="Go to the game page to play our slot machine game">
-                    <button class="btn">Let's Play!</button>
-                </a>
-            </div>
-        </main>
+    <!-- The main holds all the content of the page -->
+    <main class="main-container">
+        <!-- div's are sections in a html document, this one contains and displays the game ruels -->
+        <div class="rules">
+            <!-- a h2 heading within the div -->
+            <h2>Game Rules:</h2>
+            <!-- An ordered list which will display the list items with numbers -->
+            <ol>
+                <!-- li are the list items within the ol - ordered list -->
+                <li>3-of-a-kind matches will earn you 100 points</li>
+                <li>Easy Mode: 20 moves to reach 100 points</li>
+                <li>Medium Mode: 15 moves to reach 200 points</li>
+                <li>Hard Mode: 10 moves to reach 400 points</li>
+                <li>If you notice any bugs/errors, please contact us via our contact form</li>
+            </ol>
+            <!-- This is a button that naigates to the game -->
+            <a href="game.html" aria-label="Go to the game page to play our slot machine game">
+                <button class="btn">Let's Play!</button>
+            </a>
+        </div>
     </main>
     <!-- Footer -->
     <footer>
