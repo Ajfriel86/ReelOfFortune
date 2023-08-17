@@ -29,7 +29,8 @@
 </head>
 
 <body>
-    <<header class="header">
+    <!-- Holding the contents of the nav bar and heading -->
+    <header class="header">
         <h1 class="logo">Reel of Fortune</h1>
         <!-- This checkbox is used to open/close the hamburger menu when it is activated but it also hidden with css -->
         <input type="checkbox" id="nav-toggle" class="nav-toggle">
@@ -60,84 +61,85 @@
             <!-- the span is used within the label to display the 3 lines of the hamburger menu -->
             <span></span>
         </label>
-        </header>
+    </header>
+    <!-- The main holds all the content of the page -->
+    <main class="container">
+        <!-- A div the conatins and displays the thank you message on screen -->
+        <div class="slot-machine">
+            <h2>Thank you...</h2>
+        </div>
+    </main>
+    <!-- Footer -->
+    <footer>
+        <!-- Left side of footer for contacting -->
+        <div class="footer-left">
+            <!-- Contact information -->
+            <p>Contact</p>
+            <!-- Unordered list, ul, of the contact information -->
+            <ul>
+                <!-- List item, li, contacting the contact information -->
+                <li>
+                    <!-- Anchor, a, that sends opens an email with the companies email address in it -->
+                    <a href="mailto:angus.friel.1986@gmail.com" target="_top" aria-label="Send us an email">
+                        <!-- Font awesome icon for the email contact informaiton -->
+                        <i class="fa fa-regular fa-envelope" style="color: #ffffff;"></i>
+                        Email
+                    </a>
+                </li>
+                <li>
+                    <!-- Anchor, a, for the phone number of the company -->
+                    <a href="tel:085-12345678" aria-label="give us a call">
+                        <!-- Font awesome icon for a telephone -->
+                        <i class="fa fa-solid fa-phone" style="color: #ffffff;"></i>
+                        085-12345678
+                    </a>
+                </li>
+                <li>
+                    <!-- Anchor, a, that links to a google maps page with a map of the companies location -->
+                    <a href="https://goo.gl/maps/zkAsYinidmJm7thV9" target="_blank"
+                        aria-label="go to google mapos to see where we are">
+                        <!-- Font awesome icon of a location pin -->
+                        <i class="fas fa-map-marker-alt" style="color: #ffffff;"></i>
+                        Games World, Parkmore, Galway
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <!-- Right side of foot for social links -->
+        <div class="footer-right">
+            <!-- Social media information -->
+            <p>Social</p>
+            <!-- Unordered list, li, of the social media information -->
+            <ul>
+                <!-- List items that conatin the social media information -->
+                <li>
+                    <!-- Anchor, a, that links to facebook -->
+                    <a href="https://www.facebook.com/" target="_blank" aria-label="Go to out Facebook page">
+                        <!-- Font awesome icon of the facebook logo -->
+                        <i class="fa fa-brands fa-facebook-f" style="color: #ffffff;"></i>
+                        Facebook
+                    </a>
+                </li>
+                <li>
+                    <!-- Anchor, a, that links to instagram -->
+                    <a href="https://www.instagram.com/" target="_blank" aria-label="go to our instagram">
+                        <!-- Font awesome icon of the instagram logo -->
+                        <i class="fa fa-brands fa-instagram" style="color: #ffffff;"></i>
+                        Instagram
+                    </a>
+                </li>
+                <li>
+                    <!-- Anchor, a, that links to youtube -->
+                    <a href="https://www.youtube.com" target="_blank" aria-label="go to our youtube channel">
+                        <i class="fa fa-brands fa-youtube" style="color: #ffffff;"></i>
+                        Youtube
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </footer>
 
-        <main class="container">
-            <div class="slot-machine">
-                <h2>Thank you...</h2>
-            </div>
-        </main>
-        <!-- Footer -->
-        <footer>
-            <!-- Left side of footer for contacting -->
-            <div class="footer-left">
-                <!-- Contact information -->
-                <p>Contact</p>
-                <!-- Unordered list, ul, of the contact information -->
-                <ul>
-                    <!-- List item, li, contacting the contact information -->
-                    <li>
-                        <!-- Anchor, a, that sends opens an email with the companies email address in it -->
-                        <a href="mailto:angus.friel.1986@gmail.com" target="_top" aria-label="Send us an email">
-                            <!-- Font awesome icon for the email contact informaiton -->
-                            <i class="fa fa-regular fa-envelope" style="color: #ffffff;"></i>
-                            Email
-                        </a>
-                    </li>
-                    <li>
-                        <!-- Anchor, a, for the phone number of the company -->
-                        <a href="tel:085-12345678" aria-label="give us a call">
-                            <!-- Font awesome icon for a telephone -->
-                            <i class="fa fa-solid fa-phone" style="color: #ffffff;"></i>
-                            085-12345678
-                        </a>
-                    </li>
-                    <li>
-                        <!-- Anchor, a, that links to a google maps page with a map of the companies location -->
-                        <a href="https://goo.gl/maps/zkAsYinidmJm7thV9" target="_blank"
-                            aria-label="go to google mapos to see where we are">
-                            <!-- Font awesome icon of a location pin -->
-                            <i class="fas fa-map-marker-alt" style="color: #ffffff;"></i>
-                            Games World, Parkmore, Galway
-                        </a>
-                    </li>
-                </ul>
-            </div>
-            <!-- Right side of foot for social links -->
-            <div class="footer-right">
-                <!-- Social media information -->
-                <p>Social</p>
-                <!-- Unordered list, li, of the social media information -->
-                <ul>
-                    <!-- List items that conatin the social media information -->
-                    <li>
-                        <!-- Anchor, a, that links to facebook -->
-                        <a href="https://www.facebook.com/" target="_blank" aria-label="Go to out Facebook page">
-                            <!-- Font awesome icon of the facebook logo -->
-                            <i class="fa fa-brands fa-facebook-f" style="color: #ffffff;"></i>
-                            Facebook
-                        </a>
-                    </li>
-                    <li>
-                        <!-- Anchor, a, that links to instagram -->
-                        <a href="https://www.instagram.com/" target="_blank" aria-label="go to our instagram">
-                            <!-- Font awesome icon of the instagram logo -->
-                            <i class="fa fa-brands fa-instagram" style="color: #ffffff;"></i>
-                            Instagram
-                        </a>
-                    </li>
-                    <li>
-                        <!-- Anchor, a, that links to youtube -->
-                        <a href="https://www.youtube.com" target="_blank" aria-label="go to our youtube channel">
-                            <i class="fa fa-brands fa-youtube" style="color: #ffffff;"></i>
-                            Youtube
-                        </a>
-                    </li>
-                </ul>
-            </div>
-        </footer>
-
-        <script src="assets/js/script.js" async defer></script>
+    <script src="assets/js/script.js" async defer></script>
 </body>
 
 </html>
