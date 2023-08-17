@@ -475,4 +475,3 @@ class SlotMachine { // Define the SlotMachine class for managing the game
 }
 // Create an instance of the SlotMachine class with the default level 'medium'
 const slotMachine = new SlotMachine("medium");
-slotMachine();
