@@ -1,16 +1,26 @@
 /* jshint esversion: 8 */
-
-class Reel { // Define the Reel class for handling individual reels
-    constructor(id, callback) { // Constructor for the identifier and callback
-        this.id = id; // Identifier for the reel
-        this.defaultImage = 'x.png'; // This is hte default image that will be displayed at the start of a game or when the game is reset
-        this.images = ['orange.png', 'lemon.png', 'grape.png', 'diamond.png', 'cherry.png', 'bell.png', '7.jpg']; // This is an Array of images to be used for the reels
-        this.element = document.getElementById(`reel${id}`); // Getting the 'reel*' id from the html doc
-        this.imageElement = document.getElementById(`img${id}`); // Getting the 'img*' id from the html doc
-        this.callback = callback; // Callback function to execute after spinning completes
+// Define the Reel class for handling individual reels
+class Reel {
+    // Constructor for the identifier and callback
+    constructor(id, callback) {
+        // Identifier for the reel
+        this.id = id;
+        // This is hte default image that will be displayed at the start of a game or when the game is reset
+        this.defaultImage = 'x.png';
+        // This is an Array of images to be used for the reels
+        this.images = ['orange.png', 'lemon.png', 'grape.png', 'diamond.png', 'cherry.png', 'bell.png', '7.jpg'];
+        // Getting the 'reel*' id from the html doc
+        this.element = document.getElementById(`reel${id}`);
+        // Getting the 'img*' id from the html doc
+        this.imageElement = document.getElementById(`img${id}`);
+        // Callback function to execute after spinning complete
+        this.callback = callback;
+        s
     }
-    spin() { // Method to spin the reel
-        // 
+
+    // Method to spin the reel
+    spin() {
+        // this is setting the src attribute to the img tags in the html doc
         this.imageElement.src = 'assets/images/' + this.defaultImage;
         // creating a variable for a random index, Math.floor rounds fdown to the nearest integer, and Math.random generates a random number and chooses this from the selection (or lenght/amount) of images
         const randomIndex = Math.floor(Math.random() * this.images.length);
@@ -28,11 +38,13 @@ class Reel { // Define the Reel class for handling individual reels
         // Set the image source
         this.imageElement.src = imagePath;
     }
+
     stopSpin() { // Method to stop the spinning of the reel
         // Remove the 'load' event listener from the image element
         this.imageElement.removeEventListener("load", this.callback);
     }
 }
+
 class SlotMachine { // Define the SlotMachine class for managing the game
     // constructor for the level setting of the game, easy/med/hard
     constructor(level) {
@@ -71,7 +83,6 @@ class SlotMachine { // Define the SlotMachine class for managing the game
         this.levelSelect.addEventListener('change', this.updateLevel.bind(this));
         // This refers to the HTML element spin-button, the event is listening for the click on this button and will bind that click to the JS proerpty spinButton
         this.spinButton.addEventListener('click', this.spin.bind(this));
-
         // This adds an event listener to the c"lick of the spin-button in the html doc, and then binds it to the reset button to enable it, as it is grayed out other wise
         this.spinButton.addEventListener('click', this.enableResetButton.bind(this));
         // This adds an event listener to the click of the reset-button in the html doc, it then uses an event object and an arrow function to define its behavior, in this case event.preventDefault(); 
@@ -79,6 +90,7 @@ class SlotMachine { // Define the SlotMachine class for managing the game
             // When the reset button is clicked  the game will reset but the event will technically pause the game with the event.preventDefault(); until the user selects yes/no from the popup
             this.resetGame(event);
         });
+
         // This is in reference to the selected level by the user, this will set the value picked by the user and then apply that to the game
         this.levelSelect.value = this.level;
         // This calls the method updatePointsDisplay, which will update the on screen value of the points earned by the user
@@ -105,6 +117,7 @@ class SlotMachine { // Define the SlotMachine class for managing the game
                 // do nothing
             }
         });
+
         // Adding event listeners to the contact button on the html doc
         contactButton.addEventListener('click', (event) => {
             // Prevents the default navigation behavior so the user can engauge with the popup before being navigated away from the page
@@ -121,7 +134,6 @@ class SlotMachine { // Define the SlotMachine class for managing the game
                 // do nothing
             }
         });
-
     }
 
     // This is a method to show a custom popup message with function parameters that will be passed through it
@@ -136,10 +148,8 @@ class SlotMachine { // Define the SlotMachine class for managing the game
         const popupNoButton = document.getElementById('popup-no');
         // A variable assigned to the html id popup-okay
         const popupOKButton = document.getElementById('popup-okay');
-
         // This sets the provided message into the popup
         popupMessage.innerText = message;
-
         // Using an if statement to display the differrent buttons on the popup
         if (showYesNoButtons) {
             // Show the Yes/No buttons but not the OK button
@@ -153,10 +163,8 @@ class SlotMachine { // Define the SlotMachine class for managing the game
             popupNoButton.style.display = "none";
             popupOKButton.style.display = "flex";
         }
-
         // Setting the dispaly to flex on the popup for responsiveness 
         popup.style.display = "flex";
-
         // Adding an event listener to the yes button to wait for a click
         popupYesButton.addEventListener("click", () => {
             // When clicked, hide the popup
