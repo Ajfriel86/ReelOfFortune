@@ -43,19 +43,19 @@ h1 {
 }
 
 /* Styling the navigation bar */
-.nav-toggle {
+.nav-tag {
     position: absolute !important;
     top: -9999px !important;
     left: -9999px !important;
 }
 
 /* Styling the color of the hamburger menu */
-.nav-toggle:focus~.nav-toggle-label {
+.nav-tag:focus~.nav-tag-label {
     outline: 3px solid var(--border-white);
 }
 
 /* Styling/positioning the label used for the hamburger menu */
-.nav-toggle-label {
+.nav-tag-label {
     position: absolute;
     top: 0;
     right: 0;
@@ -66,9 +66,9 @@ h1 {
 }
 
 /* Styling used to dispaly 3 lines of the hamburger menu */
-.nav-toggle-label span,
-.nav-toggle-label span::before,
-.nav-toggle-label span::after {
+.nav-tag-label span,
+.nav-tag-label span::before,
+.nav-tag-label span::after {
     display: block;
     background: var(--border-white);
     height: 2px;
@@ -78,19 +78,19 @@ h1 {
 }
 
 /*  creates the 1st lines in the hamburger menu and positions them */
-.nav-toggle-label span::before,
-.nav-toggle-label span::after {
+.nav-tag-label span::before,
+.nav-tag-label span::after {
     content: '';
     position: absolute;
 }
 
 /*  creates the 2nd lines in the hamburger menu */
-.nav-toggle-label span::before {
+.nav-tag-label span::before {
     bottom: 7px;
 }
 
 /*  creates the 3rd lines in the hamburger menu */
-.nav-toggle-label span::after {
+.nav-tag-label span::after {
     top: 7px;
 }
 
@@ -136,13 +136,13 @@ nav a:hover {
 }
 
 /* This is used to scale the hamburger menu when it is clicked */
-.nav-toggle:checked~nav {
+.nav-tag:checked~nav {
     transform: scale(1, 1);
 }
 
 /* This targets the anchor tag in the nav when it is checked and helps with the transition when viewing the hamgurger menu */
 
-.nav-toggle:checked~nav a {
+.nav-tag:checked~nav a {
     opacity: 1;
     transition: opacity 250ms ease-in-out 250ms;
 }
@@ -543,7 +543,7 @@ screen and (max-height:768px) {
 
 
     footer {
-        font-size: 9px;
+        font-size: 13px;
         padding-left: 0.5rem;
     }
 }
@@ -596,7 +596,7 @@ screen and (max-height:480px) {
 
 /* Media query for hamburger menu */
 @media screen and (min-width: 800px) {
-    .nav-toggle-label {
+    .nav-tag-label {
         display: none;
     }
 
@@ -605,7 +605,7 @@ screen and (max-height:480px) {
         grid-template-columns: 1fr auto minmax(600px, 3fr) 1fr;
     }
 
-    .logo {
+    .heading {
         grid-column: 2 / 3;
     }
 
