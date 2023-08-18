@@ -2,11 +2,11 @@
 [View Deployed Site Here](https://ajfriel86.github.io/ReelOfFortune/)
 
 ## About
-This site is comprised of three main pages, and a thank you page. It is based on a slot machine game you would find in a casino. 
+This site is comprised of three main pages and a Thank You page. It is based on a slot machine game you would find in a casino. 
 The landing page displays the rules for the game with a button that takes you to the game. 
-The second page, or game page, displays the game.
-The third page has a contact form.
-The last page, which is only displayed once the form is submitted, displays a thank you message once the form has been submitted.
+The second page, or Game Page, displays the game.
+The third page has a Contact form.
+The last page, which only displays a thank you message once the form has been submitted.
 The site was made using HTML, CSS, and JavaScript. 
 I opted to create the JavaScript code using the programming paradigm, Object Orientated Programming, or O.O.P.
 
@@ -23,32 +23,31 @@ I opted to create the JavaScript code using the programming paradigm, Object Ori
 ---
 
 ## User stories:
-1. As a site user, I would like the site in English, so it is understandable to me
+1. As a site user, I would like the site in English so it is understandable to me
 
-1. As a site user, I would like to play a game, for healthy brain stimulation 
+1. As a site user, I would like to play a game for healthy brain stimulation 
 
-1. As a site user, I am open-minded and willing to try new games, to help my mental health
+1. As a site user, I am open-minded and willing to try new games to help my mental health
 
-1. As a site user, I am interested in games, as I enjoy the competitiveness 
+1. As a site user, I am interested in games as I enjoy the competitiveness 
 
-1. As a site user, I wish to navigate the site easily, to make my experience more fun
+1. As a site user, I wish to navigate the site easily to make my experience more fun
 
-1. As a site user, I would like the information to be clear, so I have a better understanding of what the game does
+1. As a site user, I would like the information to be clear so I have a better understanding of what the game does
 
 1. As a site user, I would like to know the game rules, so it makes the experience more fun
 
-1. As a site user, I would like to be able to contact the company owner, if there are any bugs/issues with the game
+1. As a site user, I would like to be able to contact the company owner if there are any bugs/issues with the game
 
-1. As a site user, I would like to know where the company is, so I know how to contact them outside of the contact form
+1. As a site user, I would like to know where the company is so I know how to contact them outside of the contact form
 
-1. As a site user, I would like a reset function, in case of any mistakes/errors made by myself
+1. As a site user, I would like a reset function in case of any mistakes or errors
 
-
-### Site-Owner:
+### Site Owner:
 
 1. As a site owner, I would like the site to display all the necessary information for site users to understand
 
-1. As a site owner, I would like the site to be designed with a games mindset, so it has a clear and concise design
+1. As a site owner, I would like the site to be designed with a games mindset so it has a clear and concise design
 
 1. As a site owner, I would like game rules to be displayed for site users to know how the game is played
 
@@ -61,7 +60,7 @@ I opted to create the JavaScript code using the programming paradigm, Object Ori
 
 1. Landing page
 
-   - Upon visiting the site the initial page will display the game rules as well as a button "Let's Play." There is also a navigation bar, for the home page, game page, and contact page
+   - Upon visiting the site, the initial page will display the game rules as well as a button "Let's Play." There is also a navigation bar, for the home page, game page, and contact page
 
     ![landing page](./read_me_images/home_page.png)
     ![mobile landing page](./read_me_images/mobile_home_page.png)
@@ -145,7 +144,7 @@ For the colors, I used the [Adobe color wheel](https://color.adobe.com/create/co
     
 ![color swatch](./read_me_images/colour_swatch.png)
 
-After deciding on a color scheme I wanted to get the feel of a card table in a casino. So creating the divs and giving them the color scheme with rounded, colored borders, and box-shadow, I think makes it stand out a bit more.
+After deciding on a color scheme I wanted to get the feel of a card table in a casino. I created the divs and rounded, colored borders, with box-shadows to make them stand out more.
 
 ![Game Page](./read_me_images/game_page.png)
 
@@ -159,7 +158,7 @@ After deciding on a color scheme I wanted to get the feel of a card table in a c
 ![Image Path Issue 2](./read_me_images/image_path_issue.png)
 ![Image Path Issue 3](./read_me_images/console_log.png)
 
-- Another bug that I did not document as well was the spin() method within the slotMachine() class. This method is used to handle the spin click of the game. But, as a user got a 3-of-a-kind match they were getting four times the points. Once for winning, and three times extra, one for each reel. To overcome this, I created a stopSpin() method. That is called at the end of the spin() method. This solved that issue.
+- Another bug that I did not document was the spin() method within the slotMachine() class. This method is used to handle the spin click of the game. But, as a user got a 3-of-a-kind match they were getting four times the points. Once for winning, and three times extra, one for each reel. To overcome this, I created a stopSpin() method. That is called at the end of the spin() method. This solved that issue.
 
 ### Performance
 - Landing Page Performance
@@ -179,9 +178,6 @@ After deciding on a color scheme I wanted to get the feel of a card table in a c
 - The site has been tested out on various screen sizes with no issues. It was also tested on the Chrome extension, [Responsive Viewer](https://chrome.google.com/webstore/detail/responsive-viewer/inmopeiepgfljkpkidclfgbgbmfcennb)
 
 ![Responsive Viewer](./read_me_images/response_view.png)
-
-
-
 
 ### Validation
 #### HTML:
