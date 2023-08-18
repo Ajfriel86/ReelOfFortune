@@ -1,7 +1,4 @@
-# Pilates Paradise
-
-![Responsive Image](./Readmeimages/responsive.jpg)
-
+# Reel Of Fortune
 [View Deployed Site Here](https://ajfriel86.github.io/ReelOfFortune/)
 
 ## About
@@ -13,6 +10,16 @@ The last page, which is only displayed once the form is submitted, displays a th
 The site was made using HTML, CSS, and JavaScript. 
 I opted to create the JavaScript code using the programming paradigm, Object Orientated Programming, or O.O.P.
 
+![Responsive Image](./read_me_images/responsive.png)
+
+## Index – Table of Contents
+* [User Experience (UX)](#user-stories) 
+* [Features](#features)
+* [Technologies Used](#technologies-used)
+* [Design](#design)
+* [Testing](#testing)
+* [Deployment](#deployment)
+* [Credits](#credits)
 ---
 
 ## User stories:
@@ -134,39 +141,45 @@ I opted to create the JavaScript code using the programming paradigm, Object Ori
 
 ### Implementation of Design
 
+For the colors, I used the [Adobe color wheel](https://color.adobe.com/create/color-wheel). I was looking for a casino color scheme so I used a base color and then selected complementary colors, which gave me the effect I was looking for. 
     
-![color swatch](./read_me_imagess/colour_swatch.png)
+![color swatch](./read_me_images/colour_swatch.png)
 
+After deciding on a color scheme I wanted to get the feel of a card table in a casino. So creating the divs and giving them the color scheme with rounded, colored borders, and box-shadow, I think makes it stand out a bit more.
 
+![Game Page](./read_me_images/game_page.png)
 
 ## Testing
 
 ### Bugs
 
-- 
+- As I was having some image path issues after pushing locally to GitHud, it took some time to debug. I used console.log() to track if certain elements were being read. It made it easier to figure out where the issue was. This was rectified by replacing the old path, './assets/images/' with 'assets/image' in the script.js file and then in CSS replacing '/assets/images/casino.jpg' with ../images/casino.jpg'
 
-- 
+![Image Path Issue](./read_me_images/image_issue.png)
+![Image Path Issue 2](./read_me_images/image_path_issue.png)
+![Image Path Issue 3](./read_me_images/console_log.png)
 
-- 
-
-- 
-
--  
-
-- 
-
-
-- 
+- Another bug that I did not document as well was the spin() method within the slotMachine() class. This method is used to handle the spin click of the game. But, as a user got a 3-of-a-kind match they were getting four times the points. Once for winning, and three times extra, one for each reel. To overcome this, I created a stopSpin() method. That is called at the end of the spin() method. This solved that issue.
 
 ### Performance
+- Landing Page Performance
 
+![Home Lighthouse](./read_me_images/home_lighthosue.png)
 
+- Game Page Performance
 
-- 
+![Game Lighthouse](./read_me_images/game_lighthouse.png)
 
-- 
+- Contact Page Performance
+
+![Contact Lighthouse](./read_me_images/contact_lighthouse.png)
 
 ### Responsive Design
+
+- The site has been tested out on various screen sizes with no issues. It was also tested on the Chrome extension, [Responsive Viewer](https://chrome.google.com/webstore/detail/responsive-viewer/inmopeiepgfljkpkidclfgbgbmfcennb)
+
+![Responsive Viewer](./read_me_images/response_view.png)
+
 
 
 
@@ -204,7 +217,7 @@ I opted to create the JavaScript code using the programming paradigm, Object Ori
 
 #### JavaScript:
 
-- Some errors arose in JavaScript that were easily fixed by adding the semicolons, and declaring & defining the variables
+- Some errors arose in JavaScript that was easily fixed by adding the semicolons and declaring & defining the variables
 
 ![JavaScript Validation](./read_me_images/jshint_val.png)
 
@@ -261,4 +274,6 @@ These steps can where found in the help documentation for GitHub here:
    - [Mozzila - HTML Markup](https://www.w3.org/TR/2012/WD-html-markup-20120329/ul.html): This was used to understand HTML markup in more detail
    - [W3 Schools - Anchor Tags](https://www.w3schools.com/tags/tag_a.asp): THis was used to understand anchor tags in more detail
    - [Cloning a repository](https://docs.github.com/en/repositories/creating-and-managing-repositories/cloning-a-repository): This was used to understand how to clone a repository
+   - [How to make a slot-machine with HTML, CSS and Javascript](https://www.youtube.com/watch?v=boI2B4Gpp34): This helped me in understanding how the game would work in JavaScript
+   - [ASMR Programming - Slot Game Coding With JavaScript - No Talking](https://www.youtube.com/watch?v=LCyzgXwWGDQ): This was another great resource for getting the game off the ground and understanding some of the concepts needed to build it
 
