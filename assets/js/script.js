@@ -1,4 +1,5 @@
 /* jshint esversion: 8 */
+
 // Define the Reel class for handling individual reels
 class Reel {
     // Constructor for the identifier and callback
@@ -380,7 +381,7 @@ class SlotMachine { // Define the SlotMachine class for managing the game
         // Adds the class to it which grays out the button 
         this.spinButton.classList.add("disabled-button");
         // Show a confirmation popup before resetting the game
-        this.showPopup("Are you sure you want to reset the game?", true); // Passing true to show yes/no buttons
+        this.showPopup("Are you sure you want to reset the game?", true);
         // assigning a variable to the html id popup yes button
         const popupYesButton = document.getElementById('popup-yes');
         // Adding an event listener to the click of the button
@@ -398,11 +399,26 @@ class SlotMachine { // Define the SlotMachine class for managing the game
             this.updateMovesDisplay();
             // Updates the points
             this.updatePointsDisplay();
+            // Disable the reset button after it's clicked
+            this.resetButton.disabled = true;
+            // Addes the grayed out look
+            this.resetButton.classList.add("disabled-button");
         });
-        // Disable the reset button after it's clicked
-        this.resetButton.disabled = true;
-        // Addes the grayed out look
-        this.resetButton.classList.add("disabled-button");
+
+        // Assign a variable to the popups no button
+        const popupNoButton = document.getElementById("popup-no");
+        // Adding an event listener to the click
+        popupNoButton.addEventListener("click", () => {
+            // When click close the popup
+            this.hidePopup();
+            this.spinButton.disabled = false;
+            // Removes grayed out look
+            this.spinButton.classList.remove("disabled-button");
+            const resetListener = () => {
+                // Remove the event listener from the No button after execution
+                popupNoButton.removeEventListener("click", resetListener);
+            };
+        });
     }
 
     // Method to update the selected game level
