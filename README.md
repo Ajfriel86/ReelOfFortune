@@ -12,14 +12,6 @@ I opted to create the JavaScript code using the programming paradigm, Object Ori
 
 ![Responsive Image](./read_me_images/responsive.png)
 
-## Index – Table of Contents
-* [User Stories](#user-stories) 
-* [Features](#features)
-* [Technologies Used](#technologies-used)
-* [Design](#design)
-* [Testing](#testing)
-* [Deployment](#deployment)
-* [Credits](#credits)
 ---
 
 ## User stories:
