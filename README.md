@@ -13,7 +13,7 @@ I opted to create the JavaScript code using the programming paradigm, Object Ori
 ![Responsive Image](./read_me_images/responsive.png)
 
 ## Index – Table of Contents
-* [User Experience (UX)](#user-stories) 
+* [User Stories](#user-stories) 
 * [Features](#features)
 * [Technologies Used](#technologies-used)
 * [Design](#design)
@@ -204,10 +204,11 @@ After deciding on a color scheme I wanted to get the feel of a card table in a c
 ![thanks](./read_me_images/w3_val_ty.png)
 
 #### CSS:
+- These errors were fixed as my decimal point was in the wrong spot:
 
 ![CSS](./read_me_images/w3_css.png)
 
-- These errors were fixed as my decimal point was in the wrong spot
+- Issue fixed: 
 
 ![CSS](./read_me_images/w3_css_fix.png)
 
