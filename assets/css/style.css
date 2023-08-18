@@ -417,7 +417,6 @@ footer li a:visited {
 /* styles the hover action on an anchor tag of a list item on the footer of every page */
 footer li a:hover {
     color: var(--border-white);
-    ;
     padding-bottom: 0.1rem;
     border-bottom-style: solid;
     border-bottom-width: 0.1rem;
