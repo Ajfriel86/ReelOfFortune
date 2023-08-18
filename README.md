@@ -150,7 +150,13 @@ After deciding on a color scheme I wanted to get the feel of a card table in a c
 ![Image Path Issue 2](./read_me_images/image_path_issue.png)
 ![Image Path Issue 3](./read_me_images/console_log.png)
 
-- Another bug that I did not document was the spin() method within the slotMachine() class. This method is used to handle the spin click of the game. But, as a user got a 3-of-a-kind match they were getting four times the points. Once for winning, and three times extra, one for each reel. To overcome this, I created a stopSpin() method. That is called at the end of the spin() method. This solved that issue.
+- Another bug that I did not document was the spin() method within the slotMachine() class. This method is used to handle the spin click of the game. But, as a user got a 3-of-a-kind match they were getting four times the points. Once for winning, and three times extra, one for each reel. To overcome this, I created a stopSpin() method. That is called when the spin() method has ended. This solved that issue.
+
+- The final issue I encountered was graying out the buttons when they should not be in use. For example, the 'Reset' button is grayed out and disabled when the user logs in. When the spin button has been clicked, the 'Reset' button is then enabled. When the 'Reset' button is clicked a popup is displayed with buttons for a yes or no action about resetting the game. When the Reset button is clicked the Spin button is disabled and grayed out. Then when the user clicks yes, it resets the game and enables the Spin button. 
+My issue was with the no button on the popup. When clicked, the user should return to the game they were playing and the Spin button should be enabled as well as the Reset button. I took a while to comb through the code but as it turns out, I did not have the event listener for the no button within the resetGame() method. Once I realized this it was easy to fix. 
+
+![Rest Issue](./read_me_images/reset_issue.png)
+![Rest Issue2](./read_me_images/reset_issue2.png)
 
 ### Performance
 - Landing Page Performance
