@@ -447,8 +447,7 @@ footer p {
 }
 
 /* Media queries for tablet screen */
-@media only screen and (max-width: 1280px),
-screen and (max-height:800px) {
+@media only screen and (max-width: 1280px) and (max-height:800px) {
 
     .reel {
         width: 12rem;
@@ -480,8 +479,7 @@ screen and (max-height:800px) {
 }
 
 /* Media query for small tablet or larger phone screen */
-@media only screen and (max-width: 1024px),
-screen and (max-height:768px) {
+@media only screen and (max-width: 1024px) and (max-height:768px) {
 
     .rules {
         font-size: calc(70% + 0.8vmin) !important;
@@ -549,8 +547,7 @@ screen and (max-height:768px) {
 }
 
 /* Media query for phone */
-@media only screen and (max-width: 800px),
-screen and (max-height:480px) {
+@media only screen and (max-width: 800px) and (max-height:480px) {
 
     .rules {
         font-size: calc(60% + 0.8vmin) !important;
